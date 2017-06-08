@@ -1,4 +1,4 @@
-# andschwa's dotfiles
+# Prathyk's Dotfiles
 
 Uses Git [subtree][] to keep my dotfiles in one place in an elegant manner.
 With inspiration from [xero][], uses [GNU Stow][] to symlink files one folder
