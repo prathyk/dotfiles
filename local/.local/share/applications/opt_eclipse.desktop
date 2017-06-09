@@ -1,10 +1,10 @@
 [Desktop Entry]
-Version=1.0
 Type=Application
-Name=EW
-Comment=Work eclipse
-Exec=/home/osboxes/dev/ecpse/oomInstalled/eclipse/eclipse/eclipse
+Name=EclipseWork
+Comment=Eclipse Integrated Development Environment
 Icon=/home/osboxes/dev/ecpse/oomInstalled/eclipse/eclipse/icon.xpm
-Path=
+Exec=/home/osboxes/dev/ecpse/oomInstalled/eclipse/eclipse/eclipse
 Terminal=false
-StartupNotify=false
+Categories=Development;IDE;Java;
+StartupWMClass=Eclipse
+Name[en_GB.UTF-8]=EW

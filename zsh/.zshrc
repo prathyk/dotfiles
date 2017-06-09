@@ -1,4 +1,6 @@
 source $HOME/.antigenrc
+source ~/.zsh/aliases.zsh
+source ~/.zsh/keybindings.zsh
 # Lines configured by zsh-newuser-install
 HISTFILE=~/.histfile
 HISTSIZE=100000
