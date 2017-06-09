@@ -1,0 +1,10 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=EclipseWork
+Comment=Work eclipse
+Exec=/home/osboxes/dev/ecpse/oomInstalled/eclipse/eclipse/eclipse
+Icon=/home/osboxes/dev/ecpse/oomInstalled/eclipse/eclipse/icon.xpm
+Path=
+Terminal=false
+StartupNotify=false
