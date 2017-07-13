@@ -110,20 +110,23 @@ set wildmenu
 set wildmode=list:longest
 set wildignore=*.o,*.fasl
 
-autocmd BufRead letter* set filetype=mail
-autocmd Filetype mail set fo -=l autoindent spell
+if has("autocmd")
 
-autocmd Filetype sh set ts=4 shiftwidth=2 expandtab
-autocmd Filetype lisp,ruby,xml,html set ts=8 shiftwidth=2 expandtab
-autocmd Filetype python set ts=2 shiftwidth=2 expandtab
-autocmd Filetype xml,xslt,diff,ruby color desert
-autocmd Filetype xml,xslt,diff,ruby set expandtab
-autocmd FileType javascript,html set ts=2 shiftwidth=2 expandtab
-autocmd FileType java set ts=2 shiftwidth=2 expandtab
-autocmd FileType r set ts=2 shiftwidth=2 expandtab
-autocmd BufReadPre viper,.viper set filetype=lisp
-autocmd FileType tex set ts=2 shiftwidth=2 expandtab
+  autocmd BufRead letter* set filetype=mail
+  autocmd Filetype mail set fo -=l autoindent spell
 
+  autocmd Filetype sh set ts=4 shiftwidth=2 expandtab
+  autocmd Filetype lisp,ruby,xml,html set ts=8 shiftwidth=2 expandtab
+  autocmd Filetype python set ts=2 shiftwidth=2 expandtab
+  autocmd Filetype xml,xslt,diff,ruby color desert
+  autocmd Filetype xml,xslt,diff,ruby set expandtab
+  autocmd FileType javascript,html set ts=2 shiftwidth=2 expandtab
+  autocmd FileType java set ts=2 shiftwidth=2 expandtab
+  autocmd FileType r set ts=2 shiftwidth=2 expandtab
+  autocmd BufReadPre viper,.viper set filetype=lisp
+  autocmd FileType tex set ts=2 shiftwidth=2 expandtab
+
+endif
 " Indent XML readably
 function! DoPrettyXML()
 	1,$!xmllint --format --recover -
@@ -180,6 +183,8 @@ Plug 'vim-scripts/JavaDecompiler.vim'			" Jad Decompiler - needs jad on path
 Plug 'https://github.com/ctrlpvim/ctrlp.vim.git'					" Fuzzy finder
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
+Plug 'tfnico/vim-gradle'
+Plug 'tpope/vim-dispatch'
 call plug#end()
 
 """ Plugin configurations
@@ -258,7 +263,7 @@ silent! source ~/.vim/functions.vim
 " --glob: Additional conditions for search (in this case ignore everything in the .git/ folder)
 " --color: Search color options
 
-command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>), 1, <bang>0)
+command! -bang -nargs=* Find call fzf#vim#grep('runcached.py -c 3600 rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>), 1, <bang>0)
 set grepprg=rg\ --vimgrep
 
 set tabstop=4

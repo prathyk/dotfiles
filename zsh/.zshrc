@@ -2,9 +2,8 @@ source $HOME/.antigenrc
 source ~/.zsh/aliases.zsh
 source ~/.zsh/keybindings.zsh
 # Lines configured by zsh-newuser-install
-HISTFILE=~/.histfile
-HISTSIZE=100000
-SAVEHIST=100000
+HISTSIZE=1000
+SAVEHIST=1000
 # End of lines configured by zsh-newuser-install
 
 
@@ -15,4 +14,6 @@ SAVEHIST=100000
 # --follow: Follow symlinks
 # --glob: Additional conditions for search (in this case ignore everything in the .git/ folder)
 
-export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.git/*"'
+export FZF_DEFAULT_COMMAND='runcached.py -cd 3600 rg --files --no-ignore --hidden --follow --glob "!.git/*"'
+#export FZF_DEFAULT_COMMAND='(runcached.py -cd 3600 git ls-tree -r --name-only HEAD || runcached.py -cd 3600 rg --files --no-ignore --hidden --follow --glob "!.git/*")'
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
