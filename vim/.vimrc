@@ -113,6 +113,8 @@ set wildignore=*.o,*.fasl
 if has("autocmd")
 
   autocmd BufRead letter* set filetype=mail
+  autocmd FileType java setlocal omnifunc=javacomplete#Complete
+
   autocmd Filetype mail set fo -=l autoindent spell
 
   autocmd Filetype sh set ts=4 shiftwidth=2 expandtab
@@ -125,7 +127,9 @@ if has("autocmd")
   autocmd FileType r set ts=2 shiftwidth=2 expandtab
   autocmd BufReadPre viper,.viper set filetype=lisp
   autocmd FileType tex set ts=2 shiftwidth=2 expandtab
-
+  au InsertEnter * silent execute "!sed -i.bak -e 's/TERMINAL_CURSOR_SHAPE_BLOCK/TERMINAL_CURSOR_SHAPE_IBEAM/' ~/.config/xfce4/terminal/terminalrc"                                  
+  au InsertLeave * silent execute "!sed -i.bak -e 's/TERMINAL_CURSOR_SHAPE_IBEAM/TERMINAL_CURSOR_SHAPE_BLOCK/' ~/.config/xfce4/terminal/terminalrc"                                  
+  au VimLeave * silent execute "!sed -i.bak -e 's/TERMINAL_CURSOR_SHAPE_IBEAM/TERMINAL_CURSOR_SHAPE_BLOCK/' ~/.config/xfce4/terminal/terminalrc"  
 endif
 " Indent XML readably
 function! DoPrettyXML()
@@ -158,7 +162,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'airblade/vim-gitgutter'                           " Git hunks
 Plug 'andschwa/vim-colors-solarized'                    " Best colors ever
 Plug 'easymotion/vim-easymotion'                        " Movements
-Plug 'EinfachToll/DidYouMean'                           " File guessing
+"Plug 'EinfachToll/DidYouMean'                           " File guessing
 Plug 'elzr/vim-json'                                    " Better JSON
 Plug 'majutsushi/tagbar'                                " Tagbar
 Plug 'mbbill/undotree', { 'on': 'UndotreeToggle' }      " Edits graph
@@ -167,24 +171,29 @@ Plug 'ntpeters/vim-better-whitespace'                   " Whitespace
 Plug 'scrooloose/syntastic'                             " Syntax checker
 Plug 'tmux-plugins/vim-tmux'
 Plug 'tpope/vim-commentary'                             " Comments
-Plug 'tpope/vim-eunuch'                                 " UNIX commands
+" Plug 'tpope/vim-eunuch'                                 " UNIX commands
 Plug 'tpope/vim-fugitive'                               " Git interface
+Plug 'MobiusHorizons/fugitive-stash.vim'
+Plug 'tommcdo/vim-fubitive'
 Plug 'tpope/vim-repeat'                                 " Repeat for plugins
 Plug 'tpope/vim-scriptease'                             " VimL REPL
 Plug 'tpope/vim-sensible'                               " Sensible defaults
 Plug 'tpope/vim-sleuth'                                 " Adaptive indentation
 Plug 'tpope/vim-surround'                               " Surrounding
-Plug 'tpope/vim-vinegar'                                " File explorer
+"Plug 'tpope/vim-vinegar'                                " File explorer
 Plug 'vim-airline/vim-airline'                          " Status line
 Plug 'vim-airline/vim-airline-themes'                   " Status line themes
-Plug 'vim-scripts/LustyExplorer'			" Lusty Explorer
-Plug 'vim-scripts/LustyJuggler'				" Lusty Juggler
+"Plug 'vim-scripts/LustyExplorer'			" Lusty Explorer
+"Plug 'vim-scripts/LustyJuggler'				" Lusty Juggler
 Plug 'vim-scripts/JavaDecompiler.vim'			" Jad Decompiler - needs jad on path
-Plug 'https://github.com/ctrlpvim/ctrlp.vim.git'					" Fuzzy finder
+"Plug 'https://github.com/ctrlpvim/ctrlp.vim.git'					" Fuzzy finder
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'tfnico/vim-gradle'
 Plug 'tpope/vim-dispatch'
+Plug 'artur-shaik/vim-javacomplete2'
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+" Plug 'cskeeters/jcall.vim'				" Java Call Hierarchy
 call plug#end()
 
 """ Plugin configurations
@@ -269,3 +278,34 @@ set grepprg=rg\ --vimgrep
 set tabstop=4
 set softtabstop=4
 set shiftwidth=4
+
+
+" Syntastic related settings
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 0
+let g:syntastic_check_on_wq = 0
+let g:syntastic_java_checkers=['javac']
+let g:syntastic_java_javac_config_file_enabled = 1
+" to make syntastic find the javac_config file
+function! FindConfig(prefix, what, where)
+    let cfg = findfile(a:what, escape(a:where, ' ') . ';')
+    " cfg !=# '' ? ' ' . a:prefix . ' ' . shellescape(cfg) : ''
+    exec 'source '.fnameescape(cfg)
+    return ''
+endfunction
+
+autocmd FileType java let b:syntastic_java_javac_classpath =
+    \ FindConfig('-c', '.syntastic_javac_config', expand('<afile>:p:h', 1)) .
+    \ get(g:, 'syntastic_java_javac_classpath', '') 
+
+" Turn gitgutter off by default
+" let g:gitgutter_enabled = 0
+
+
+" for fugitive stash
+let g:fugitive_stash_domains = ['http://meshgit', 'https://meshgit.pega.com/stash/projects/PRPC/repos/prpc-platform']

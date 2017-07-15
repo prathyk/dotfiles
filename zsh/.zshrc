@@ -6,8 +6,11 @@ HISTSIZE=1000
 SAVEHIST=1000
 # End of lines configured by zsh-newuser-install
 
+export EDITOR=/usr/bin/vim
+export CHEATCOLORS=true
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh && source ~/.fzf-extra.sh && source ~/.fzf-extra.zsh
 # --files: List files that would be searched but do not search
 # --no-ignore: Do not respect .gitignore, etc...
 # --hidden: Search hidden files and folders
