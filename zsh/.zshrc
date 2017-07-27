@@ -1,6 +1,7 @@
 source $HOME/.antigenrc
 source ~/.zsh/aliases.zsh
 source ~/.zsh/keybindings.zsh
+source ~/.zsh/functionDefs.zsh
 # Lines configured by zsh-newuser-install
 HISTSIZE=1000
 SAVEHIST=1000

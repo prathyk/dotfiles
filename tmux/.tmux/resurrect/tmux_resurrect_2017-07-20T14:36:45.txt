@@ -1,0 +1,3 @@
+pane	gradle	1	:..prpc-platform	1	:*	0	:/home/osboxes/dev/repo/repo1/prpc-platform	1	zsh	:
+window	gradle	1	1	:*	bebd,190x54,0,0,0
+state	gradle	

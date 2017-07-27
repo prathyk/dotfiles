@@ -63,14 +63,3 @@ d{motion}       delete text that {motion} moves over
 2dw         deletes 2 words
 5yy         copies 5 lines
 42G         go to line 42
-
-#Performance Profiling
-vim --startuptime timeCost.txt timeCost.txt
-
-:profile start profile.log
-:profile func *
-:profile file *
-" At this point do slow actions
-:profile pause
-:noautocmd qall!
-

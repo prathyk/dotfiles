@@ -1,0 +1,5 @@
+pane	gradle	1	:vim	1	:*	0	:/home/osboxes/dev/repo/repo1/prpc-platform	1	vim	:vim test/pr3unittest/src/com/pega/pegarules/unittest/util/CoverageCollectorListener.java
+pane	jacoco	1	:./gradlew	1	:*	0	:/home/osboxes/dev/repo/repo1/prpc-platform	1	java	:java -Xmx2048m -XX:MaxPermSize=512m -Dorg.gradle.appname=gradlew -classpath /home/osboxes/dev/repo/repo1/prpc-platform/gradle/wrapper/gradle-wrapper.jar org.gradle.wrapper.GradleWrapperMain build -x test -x pmdTest
+window	gradle	1	1	:*	ae5d,80x23,0,0,0
+window	jacoco	1	1	:*	bebe,190x54,0,0,1
+state	jacoco	

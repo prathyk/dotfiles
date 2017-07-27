@@ -82,7 +82,7 @@ fzfkill() {
 
   if [ "x$pid" != "x" ]
   then
-    kill -${1:-9} $pid
+    sudo kill -${1:-9} $pid
   fi
 }
 
@@ -218,5 +218,22 @@ fzv() {
           done | fzf-tmux -d -m -q "$*" -1) && vim ${files//\~/$HOME}
 }
 
+CHEATDIR=~/dotfiles/cheat/
+#cheat - edit cheatsheet vim
+cheatedit() {
+  local dir
+  dir=$(ls $CHEATDIR | fzf +m) && vim "$CHEATDIR$dir"
+}
 
+#cheat - open cheatsheet using grip
+cheatgrip() {
+  local dir
+  dir=$(ls $CHEATDIR | fzf +m) && grip -b "$CHEATDIR$dir"
+}
+
+#cheat - open cheatsheet using mdless
+cheatless() {
+  local dir
+  dir=$(ls $CHEATDIR | fzf +m) && mdless "$CHEATDIR$dir"
+}
 

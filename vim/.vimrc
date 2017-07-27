@@ -47,12 +47,10 @@ set tags=tags;~/
 " Who needs .gvimrc?
 if has('gui_running')
   set encoding=utf-8
-  "set guifont=Monospace\ Bold\ 9
-  set guifont=Bitstream\ Vera\ Sans\ Mono\ 11
+  set guifont=Bitstream\ Vera\ Sans\ Mono\ 12
   " Turn off toolbar and menu
   set guioptions-=T
   set guioptions-=m
-  colorscheme inkpot
 else
   colorscheme desert
 end
@@ -113,7 +111,7 @@ set wildignore=*.o,*.fasl
 if has("autocmd")
 
   autocmd BufRead letter* set filetype=mail
-  autocmd FileType java setlocal omnifunc=javacomplete#Complete
+"  autocmd FileType java setlocal omnifunc=javacomplete#Complete
 
   autocmd Filetype mail set fo -=l autoindent spell
 
@@ -161,6 +159,8 @@ endif
 call plug#begin('~/.vim/plugged')
 Plug 'airblade/vim-gitgutter'                           " Git hunks
 Plug 'andschwa/vim-colors-solarized'                    " Best colors ever
+Plug 'flazz/vim-colorschemes'
+Plug 'felixhummel/setcolors.vim'
 Plug 'easymotion/vim-easymotion'                        " Movements
 "Plug 'EinfachToll/DidYouMean'                           " File guessing
 Plug 'elzr/vim-json'                                    " Better JSON
@@ -179,6 +179,7 @@ Plug 'tpope/vim-repeat'                                 " Repeat for plugins
 Plug 'tpope/vim-scriptease'                             " VimL REPL
 Plug 'tpope/vim-sensible'                               " Sensible defaults
 Plug 'tpope/vim-sleuth'                                 " Adaptive indentation
+Plug 'vim-scripts/ZoomWin'
 Plug 'tpope/vim-surround'                               " Surrounding
 "Plug 'tpope/vim-vinegar'                                " File explorer
 Plug 'vim-airline/vim-airline'                          " Status line
@@ -187,22 +188,26 @@ Plug 'vim-airline/vim-airline-themes'                   " Status line themes
 "Plug 'vim-scripts/LustyJuggler'				" Lusty Juggler
 Plug 'vim-scripts/JavaDecompiler.vim'			" Jad Decompiler - needs jad on path
 "Plug 'https://github.com/ctrlpvim/ctrlp.vim.git'					" Fuzzy finder
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
 Plug 'tfnico/vim-gradle'
 Plug 'tpope/vim-dispatch'
-Plug 'artur-shaik/vim-javacomplete2'
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+"Plug 'artur-shaik/vim-javacomplete2'
+Plug 'Shougo/neocomplete.vim'
+if filereadable($HOME . "/.vim/.vimrc-neocomplete")
+	source ~/.vim/.vimrc-neocomplete
+endif
+" Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 " Plug 'cskeeters/jcall.vim'				" Java Call Hierarchy
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
 call plug#end()
 
 """ Plugin configurations
 " GUI
 if has('gui_running')
   if has('gui_gtk')
-    set guifont=Hack\ 11
+  "  set guifont=Hack\ 11
   elseif has('gui_win32')
-    set guifont=Hack:h11:cANSI
+   " set guifont=Hack:h11:cANSI
   endif
 endif
 
@@ -295,13 +300,21 @@ let g:syntastic_java_javac_config_file_enabled = 1
 function! FindConfig(prefix, what, where)
     let cfg = findfile(a:what, escape(a:where, ' ') . ';')
     " cfg !=# '' ? ' ' . a:prefix . ' ' . shellescape(cfg) : ''
-    exec 'source '.fnameescape(cfg)
+    if filereadable(fnameescape(cfg))
+	exec 'source '.fnameescape(cfg)
+   endif
     return ''
 endfunction
 
+autocmd FileType java compiler gradlew
+autocmd FileType gradle compiler gradlew
 autocmd FileType java let b:syntastic_java_javac_classpath =
     \ FindConfig('-c', '.syntastic_javac_config', expand('<afile>:p:h', 1)) .
     \ get(g:, 'syntastic_java_javac_classpath', '') 
+
+"autocmd FileType java let b:JavaComplete_LibsPath = g:syntastic_java_javac_classpath
+
+"au FileType java au BufEnter <buffer> let $CLASSPATH=g:JavaComplete_LibsPath . ":" .   g:JavaComplete_SourcesPath
 
 " Turn gitgutter off by default
 " let g:gitgutter_enabled = 0
@@ -309,3 +322,14 @@ autocmd FileType java let b:syntastic_java_javac_classpath =
 
 " for fugitive stash
 let g:fugitive_stash_domains = ['http://meshgit', 'https://meshgit.pega.com/stash/projects/PRPC/repos/prpc-platform']
+
+" for zoomwin
+nnoremap <silent> <C-w>m :ZoomWin<CR>
+
+" Load Eclim Settings
+if filereadable($HOME . "/.vim/.vimrc-eclim")
+	source ~/.vim/.vimrc-eclim
+endif
+
+
+let g:fzf_launcher='xfce4-terminal -x sh -c %s'
