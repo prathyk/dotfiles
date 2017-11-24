@@ -1,0 +1,18 @@
+--- /tmp/GHI40a_build.gradle
++++ /tmp/0L5N1a_build.gradle
+@@ -37,6 +37,7 @@
+ 
+     dependencies {
+         classpath 'org.jfrog.buildinfo:build-info-extractor-gradle:4.4.18'
++        classpath "com.scuilion.syntastic:gradle-syntastic-plugin:0.3.8"
+         classpath 'com.netflix.nebula:gradle-dependency-lock-plugin:4.9.4'
+         classpath 'com.netflix.nebula:gradle-override-plugin:3.0.2'
+         classpath 'com.bmuschko:gradle-cargo-plugin:2.2.3'
+@@ -344,6 +345,7 @@
+ 
+ configure(jacocoProjects()) {
+     apply plugin: 'jacoco'
++    apply plugin: "com.scuilion.syntastic"
+     jacoco { toolVersion = "0.7.5+" }
+ }
+ 

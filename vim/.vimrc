@@ -56,22 +56,18 @@ else
 end
 
 " Change <Leader>
-let mapleader = ","
+let mapleader = " "
 
 " Quick timeouts on key combinations.
-set timeoutlen=300
+" set timeoutlen=300
+set timeoutlen=1000 ttimeoutlen=0
 
-" Lusty
-"let g:LustyJugglerShowKeys = 2
-"let g:LustyJugglerKeyboardLayout = "dvorak"
-"let g:LustyExplorerAlwaysShowDotFiles = 1
-let g:LustyExplorerSuppressRubyWarning = 1
-nmap <silent> <Leader>f :LustyFilesystemExplorer<CR>
-nmap <silent> <Leader>b :LustyBufferExplorer<CR>
-nmap <silent> <Leader>r :LustyFilesystemExplorerFromHere<CR>
-nmap <silent> <Leader>g :LustyBufferGrep<CR>
-nmap <silent> <Leader>j :LustyJuggler<CR>
-nmap <silent> <TAB> :LustyJugglePrevious<CR>
+
+"FZF
+let g:fzf_command_prefix='Fz'
+nmap <silent> <Leader>f :FzFiles<CR>
+nmap <silent> <Leader>b :FzBuffers<CR>
+nmap <silent> <Leader>c :FzCommands<CR>
 
 "let g:LustyJugglerAltTabMode=1
 "noremap <silent> <A-s> :LustyJuggler<CR>
@@ -80,14 +76,9 @@ nmap <silent> <TAB> :LustyJugglePrevious<CR>
 set listchars=tab:>-,trail:·,eol:$
 nmap <silent> <leader>s :set nolist!<CR>
 
-" Fix command typos (stolen from Adam Katz)
-nmap ; :
-
 " Buffer management
 nmap <C-h> :bp<CR>
 nmap <C-l> :bn<CR>
-nmap <C-d> :bw<CR>
-vmap <C-d> :bw<CR>
 
 " Toggle highlighting
 " nmap <silent> <C-n> :silent :set nohls!<CR>:silent :set nohls?<CR>
@@ -177,6 +168,7 @@ Plug 'MobiusHorizons/fugitive-stash.vim'
 Plug 'tommcdo/vim-fubitive'
 Plug 'tpope/vim-repeat'                                 " Repeat for plugins
 Plug 'tpope/vim-scriptease'                             " VimL REPL
+Plug 'tpope/vim-unimpaired'                             " Unimparied
 Plug 'tpope/vim-sensible'                               " Sensible defaults
 Plug 'tpope/vim-sleuth'                                 " Adaptive indentation
 Plug 'vim-scripts/ZoomWin'
@@ -184,14 +176,14 @@ Plug 'tpope/vim-surround'                               " Surrounding
 "Plug 'tpope/vim-vinegar'                                " File explorer
 Plug 'vim-airline/vim-airline'                          " Status line
 Plug 'vim-airline/vim-airline-themes'                   " Status line themes
-"Plug 'vim-scripts/LustyExplorer'			" Lusty Explorer
-"Plug 'vim-scripts/LustyJuggler'				" Lusty Juggler
 Plug 'vim-scripts/JavaDecompiler.vim'			" Jad Decompiler - needs jad on path
 "Plug 'https://github.com/ctrlpvim/ctrlp.vim.git'					" Fuzzy finder
 Plug 'tfnico/vim-gradle'
 Plug 'tpope/vim-dispatch'
 "Plug 'artur-shaik/vim-javacomplete2'
 Plug 'Shougo/neocomplete.vim'
+Plug 'dhruvasagar/vim-table-mode'
+Plug 'szw/vim-maximizer'
 if filereadable($HOME . "/.vim/.vimrc-neocomplete")
 	source ~/.vim/.vimrc-neocomplete
 endif
@@ -333,3 +325,10 @@ endif
 
 
 let g:fzf_launcher='xfce4-terminal -x sh -c %s'
+let g:fzf_command_prefix='Fz'
+let g:table_mode_corner='|'
+
+
+" Use filtered up and down in ex mode
+cnoremap <C-p> <Up>
+cnoremap <C-n> <Down>

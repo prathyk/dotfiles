@@ -221,8 +221,7 @@ fzv() {
 CHEATDIR=~/dotfiles/cheat/
 #cheat - edit cheatsheet vim
 cheatedit() {
-  local dir
-  dir=$(ls $CHEATDIR | fzf +m) && vim "$CHEATDIR$dir"
+  ls $CHEATDIR | fzf --print-query | { read query; read selected } && vim "$CHEATDIR$selected" || vim "$CHEATDIR$query" 
 }
 
 #cheat - open cheatsheet using grip

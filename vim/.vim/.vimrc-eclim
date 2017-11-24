@@ -14,3 +14,4 @@ endif
 let g:neocomplete#sources#omni#input_patterns.java = '\k\.\k*'
 
 let g:EclimJavaSearchSingleResult='edit'
+let g:EclimFileTypeValidate = 0
