@@ -187,4 +187,37 @@ Use `C-a` to increment and `C-x` to decrement the number in the line
 * **Note that these command do not use a register unless specified**
 * `:%norm i//` would comment the entire file. Note that the norm command would run with cursor position at beginning of each line
 * `:%norm @q` would run the macro on each line of the file
+* `<C-r><C-w>` copies the current word under the cursor in to the command line
+* `<C-p> and <C-n>` to search through the ex command history
+* Command line Window
+	| Command | Effect                                                    |
+	|---------|-----------------------------------------------------------|
+	| `q:`    | open the magical command-line window with all ex commands |
+	| `q/`    | same as above for all search history                      |
+	| `<C-f>` | switch from command line mode to command-line window      |
 
+	* Use this Command line window to edit previous commands and make a new command. 
+* You can run any shell command by doing `!{cmd}`.
+* Use `:shell` to temporarily execute many shell commands. 
+* Use `:read !{cmd}` to read output of a command in to buffer. 
+* Use `:write !{cmd}` to write contents of buffer as input to command
+* `:write !sh` executes each line in the buffer as a command
+* You can filter range of lines through an external command by `:[range]!{filter}`
+* `!{motion}` gets you to ex mode with selected range to be applied on a filter command
+* You can write a range of lines in the buffer as input to shell command by `:[range]write !{cmd}`
+* Note that if you only give a range, then vim filters that range through the shell command.
+
+## 19. Folding
+| Command          | Effect                                           |
+|------------------|--------------------------------------------------|
+| `zr`             | open folding by one level irrespective of cursor |
+| `zR`             | open folding by all levels                       |
+| `zm`             | close folding one level                          |
+| `zM`             | close all levels                                 |
+| `zo`             | open fold under cursor                           |
+| `zc`             | close current folding                            |
+| `za`             | toggle folding at cursor                         |
+| `zA or zC or zO` | apply for all folding levels                     |
+
+
+## 20. File
