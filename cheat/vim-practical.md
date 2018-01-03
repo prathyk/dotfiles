@@ -220,4 +220,19 @@ Use `C-a` to increment and `C-x` to decrement the number in the line
 | `zA or zC or zO` | apply for all folding levels                     |
 
 
-## 20. File
+## 20. Multiple files
+
+### Buffers
+
+| Command           | Effect                                                    |
+|-------------------|-----------------------------------------------------------|
+| `ls`              | list buffers                                              |
+| `bn(p,#,l,f)`     | mover to next, previous, alternate, last or first buffer  |
+| `:bufdo`          | Execute a command on all buffers                          |
+| `:{range}bdelete` | Delete range of buffers. Can also use `:bdelete N1 N2 N3` |
+
+
+### Args
+* args are much easier to work with than buffers
+* you can set args list any time with `:args {arglist}` command
+* ``:args `{shell command}` `` is also to change args with shell command.

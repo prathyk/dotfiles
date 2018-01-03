@@ -19,3 +19,107 @@
 	templatedir = ~/.git_template
 [alias]
 	ctags = !.git/hooks/ctags
+	cb = rev-parse --abbrev-ref HEAD
+
+	#logs
+	#list
+	ls = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate
+	#show files also
+	ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat
+	#no color
+	lnc = log --pretty=format:"%h\\ %s\\ [%cn]"
+	#one line with dates
+	lds = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=short
+	# with relative time
+	ld = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=relative
+	#simple
+	le = log --oneline --decorate
+
+	#file
+	filelog = log -u
+	fl = log -u
+
+	#just last commit
+	lc = "!git ll -1"
+	#diff of last commit
+	dlc = diff --cached HEAD^
+	#diff of rev
+	dr  = "!f() { git diff "$1"^.."$1"; }; f"
+	#show revision
+	lr  = "!f() { git ll "$1"^.."$1"; }; f"
+
+	#meta
+	la = "!git config -l | grep alias | cut -c 7-"
+
+	#assume
+	assume = update-index --assume-unchanged
+	unassume = update-index --no-assume-unchanged
+	assumed = "!git ls-files -v | grep ^h | cut -c 3-"
+	unassumeall = "!git assumed | xargs git update-index --no-assume-unchanged"
+	assumeall = "!git st -s | awk {'print $2'} | xargs git assume"
+
+	#basic
+	cp = cherry-pick
+	st = status -s
+	cl = clone
+	ci = commit
+	co = checkout
+	br = branch 
+	diff = diff --word-diff
+	#diff staged
+	dc = diff --cached
+
+	#reset
+	r = reset
+	r1 = reset HEAD^
+	r2 = reset HEAD^^
+	rh = reset --hard
+	rh1 = reset HEAD^ --hard
+	rh2 = reset HEAD^^ --hard
+
+	#create a branch
+	cob = checkout -b
+	#sync with origin
+	up = !git pull origin $(git cb) --rebase --prune $@ && git submodule update --init --recursive
+	cm = !git add -A && git commit -m
+	amend = commit -a --amend
+	#push
+	pub = "!git push -u origin $(git cb)"
+	# Delete the remote version of the current branch
+	unpub = "!git push origin :$(git cb)"
+	#repub
+	repub = "!git unpub && git pub"
+	#rebase with master
+	sync = !git pull origin master --rebase
+	# Interactively rebase all the commits on the current branch
+	rebase-branch = "!git rebase -i `git merge-base master HEAD`"
+	code-review = difftool origin/master...
+	
+	# Unstage any files that have been added to the staging area
+	unstage = reset HEAD
+	
+	#conflicts
+	# Checkout our version of a file and add it
+	ours = "!f() { git checkout --ours $@ && git add $@; }; f"
+	# # Checkout their version of a file and add it
+	theirs = "!f() { git checkout --theirs $@ && git add $@; }; f"
+	
+	# Merge related
+	# Given a merge commit, find the span of commits that exist(ed) on that
+	# branch. Again, not so useful in itself, but used by other aliases.
+	merge-span = "!f() { echo $(git log -1 $2 --merges --pretty=format:%P | cut -d' ' -f1)$1$(git log -1 $2 --merges --pretty=format:%P | cut -d' ' -f2); }; f"
+
+	# Find the commits that were introduced by a merge
+	merge-log = "!git log `git merge-span .. $1`"
+	# Show the changes that were introduced by a merge
+	merge-diff = "!git diff `git merge-span ... $1`"
+	# As above, but in your difftool
+	merge-difftool = "!git difftool `git merge-span ... $1`"
+
+
+	#save 
+	wip = !git add -A && git commit -m 'SAVEPOINT'
+	restore = reset HEAD~1 --mixed
+	wipe = !git add -A && git commit -qm 'WIPE SAVEPOINT' && git reset HEAD~1 --hard
+
+

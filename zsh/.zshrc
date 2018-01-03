@@ -9,6 +9,7 @@ SAVEHIST=1000
 
 export EDITOR=/usr/bin/vim
 export CHEATCOLORS=true
+export VTE_VERSION="100"
 
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh && source ~/.fzf-extra.sh && source ~/.fzf-extra.zsh

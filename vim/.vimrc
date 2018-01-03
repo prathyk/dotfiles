@@ -79,6 +79,10 @@ nmap <silent> <leader>s :set nolist!<CR>
 " Buffer management
 nmap <C-h> :bp<CR>
 nmap <C-l> :bn<CR>
+nnoremap <silent> [b :bp<CR>
+nnoremap <silent> ]b :bn<CR>
+nnoremap <silent> [B :bfirst<CR>
+nnoremap <silent> [B :blast<CR>
 
 " Toggle highlighting
 " nmap <silent> <C-n> :silent :set nohls!<CR>:silent :set nohls?<CR>
