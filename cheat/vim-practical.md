@@ -236,3 +236,33 @@ Use `C-a` to increment and `C-x` to decrement the number in the line
 * args are much easier to work with than buffers
 * you can set args list any time with `:args {arglist}` command
 * ``:args `{shell command}` `` is also to change args with shell command.
+* Use `:next` and `:pre` commands to traverse files of args
+
+### Split Windows
+* Create split
+
+	| Command            | Effect                |
+	|--------------------|-----------------------|
+	| `<C-w>s`           | Split horizontally    |
+	| `<C-w>v`           | Split vertically      |
+	| `:sp[lit] {file}`  | open file in a hsplit |
+	| `:vsp[lit] {file}` | open file in vsplit   |
+
+* Navigate
+
+	| Command                  | Effect                     |
+	|--------------------------|----------------------------|
+	| `<C-w>w` or `<C-w><C-w>` | Cycle between open windows |
+	| `<C-w>[jklh]`            | move to neighbor window    |
+
+* Resize and Rearrange
+
+	| Command          | Effect                             |
+	|------------------|------------------------------------|
+	| `<C-w>=`         | Equalize size of all windows       |
+	| `<C-w>_`         | Maximize height of active window   |
+	| `<C-w>&#124;`    | Maximize width of active window    |
+	| `[N]<C-w>_`      | Set active window height to N rows |
+	| `[N]<C-w>&#124;` | Set active window width to N rows  |
+
+

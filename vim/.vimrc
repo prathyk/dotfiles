@@ -153,6 +153,8 @@ endif
 """ Plugins
 call plug#begin('~/.vim/plugged')
 Plug 'airblade/vim-gitgutter'                           " Git hunks
+Plug 'w0rp/ale'
+
 Plug 'andschwa/vim-colors-solarized'                    " Best colors ever
 Plug 'flazz/vim-colorschemes'
 Plug 'felixhummel/setcolors.vim'
@@ -163,9 +165,12 @@ Plug 'majutsushi/tagbar'                                " Tagbar
 Plug 'mbbill/undotree', { 'on': 'UndotreeToggle' }      " Edits graph
 Plug 'mhinz/vim-grepper'                                " Better :grep
 Plug 'ntpeters/vim-better-whitespace'                   " Whitespace
-Plug 'scrooloose/syntastic'                             " Syntax checker
+"Plug 'scrooloose/syntastic'                             " Syntax checker
 Plug 'tmux-plugins/vim-tmux'
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'tmux-plugins/vim-tmux-focus-events'
 Plug 'tpope/vim-commentary'                             " Comments
+Plug 'mhinz/vim-startify'
 " Plug 'tpope/vim-eunuch'                                 " UNIX commands
 Plug 'tpope/vim-fugitive'                               " Git interface
 Plug 'MobiusHorizons/fugitive-stash.vim'
@@ -188,6 +193,7 @@ Plug 'tpope/vim-dispatch'
 Plug 'Shougo/neocomplete.vim'
 Plug 'dhruvasagar/vim-table-mode'
 Plug 'szw/vim-maximizer'
+Plug 'severin-lemaignan/vim-minimap'
 if filereadable($HOME . "/.vim/.vimrc-neocomplete")
 	source ~/.vim/.vimrc-neocomplete
 endif
@@ -305,6 +311,9 @@ endfunction
 autocmd FileType java compiler gradlew
 autocmd FileType gradle compiler gradlew
 autocmd FileType java let b:syntastic_java_javac_classpath =
+    \ FindConfig('-c', '.syntastic_javac_config', expand('<afile>:p:h', 1)) .
+    \ get(g:, 'syntastic_java_javac_classpath', '') 
+autocmd FileType java let b:ale_java_javac_classpath =
     \ FindConfig('-c', '.syntastic_javac_config', expand('<afile>:p:h', 1)) .
     \ get(g:, 'syntastic_java_javac_classpath', '') 
 
