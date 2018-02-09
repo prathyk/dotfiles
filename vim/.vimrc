@@ -69,18 +69,9 @@ nmap <silent> <Leader>f :FzFiles<CR>
 nmap <silent> <Leader>b :FzBuffers<CR>
 nmap <silent> <Leader>c :FzCommands<CR>
 
-"let g:LustyJugglerAltTabMode=1
-"noremap <silent> <A-s> :LustyJuggler<CR>
-
 " Catch trailing whitespace
 set listchars=tab:>-,trail:·,eol:$
 nmap <silent> <leader>s :set nolist!<CR>
-
-" Buffer management
-nnoremap <silent> [b :bp<CR>
-nnoremap <silent> ]b :bn<CR>
-nnoremap <silent> [B :bfirst<CR>
-nnoremap <silent> [B :blast<CR>
 
 " Toggle highlighting
 " nmap <silent> <C-n> :silent :set nohls!<CR>:silent :set nohls?<CR>
@@ -104,7 +95,6 @@ set wildignore=*.o,*.fasl
 if has("autocmd")
 
   autocmd BufRead letter* set filetype=mail
-"  autocmd FileType java setlocal omnifunc=javacomplete#Complete
 
   autocmd Filetype mail set fo -=l autoindent spell
 
@@ -156,8 +146,6 @@ Plug 'w0rp/ale'						" Async Lint
 Plug 'flazz/vim-colorschemes'
 Plug 'altercation/vim-colors-solarized'                    " Best colors ever
 Plug 'felixhummel/setcolors.vim'
-"Plug 'easymotion/vim-easymotion'                        " Movements
-"Plug 'EinfachToll/DidYouMean'                           " File guessing
 Plug 'elzr/vim-json'                                    " Better JSON
 Plug 'majutsushi/tagbar'                                " Tagbar
 Plug 'mbbill/undotree', { 'on': 'UndotreeToggle' }      " Edits graph
@@ -169,9 +157,7 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'tmux-plugins/vim-tmux-focus-events'
 Plug 'tpope/vim-commentary'                             " Comments
 Plug 'mhinz/vim-startify'
-" Plug 'tpope/vim-eunuch'                                 " UNIX commands
 Plug 'tpope/vim-fugitive'                               " Git interface
-"Plug 'zhaocai/GoldenView.Vim'
 Plug 'wesQ3/vim-windowswap'
 Plug 'MobiusHorizons/fugitive-stash.vim'
 Plug 'romgrk/winteract.vim'
@@ -184,20 +170,18 @@ Plug 'tpope/vim-sensible'                               " Sensible defaults
 Plug 'tpope/vim-sleuth'                                 " Adaptive indentation
 Plug 'vim-scripts/ZoomWin'
 Plug 'tpope/vim-surround'                               " Surrounding
-"Plug 'tpope/vim-vinegar'                                " File explorer
 Plug 'vim-airline/vim-airline'                          " Status line
 Plug 'vim-airline/vim-airline-themes'                   " Status line themes
 Plug 'vim-scripts/JavaDecompiler.vim'			" Jad Decompiler - needs jad on path
-"Plug 'https://github.com/ctrlpvim/ctrlp.vim.git'					" Fuzzy finder
 Plug 'tfnico/vim-gradle'
 Plug 'tpope/vim-dispatch'
-"Plug 'artur-shaik/vim-javacomplete2'
 Plug 'skywind3000/asyncrun.vim'
 Plug 'dhruvasagar/vim-table-mode'
 Plug 'szw/vim-maximizer'
 Plug 'severin-lemaignan/vim-minimap'
+
 "Auto complete and Snippets
-Plug 'metalelf0/supertab'
+"Plug 'metalelf0/supertab'
 if has('nvim')
   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 else
@@ -207,6 +191,7 @@ else
 endif
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
+Plug 'Shougo/echodoc.vim'
 
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
@@ -291,7 +276,7 @@ set shiftwidth=4
 
 " Syntastic related settings
 set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%{ALEGetStatusLine()}
 set statusline+=%*
 
 let g:syntastic_always_populate_loc_list = 1
@@ -323,10 +308,6 @@ autocmd FileType java let b:ale_java_javac_classpath =
 
 "au FileType java au BufEnter <buffer> let $CLASSPATH=g:JavaComplete_LibsPath . ":" .   g:JavaComplete_SourcesPath
 
-" Turn gitgutter off by default
-" let g:gitgutter_enabled = 0
-
-
 " for fugitive stash
 let g:fugitive_stash_domains = ['http://git.pega.io', 'https://git.pega.io/projects/PRPC/repos/prpc-platform/browse']
 
@@ -334,23 +315,38 @@ let g:fugitive_stash_domains = ['http://git.pega.io', 'https://git.pega.io/proje
 nnoremap <silent> <leader>m :ZoomWin<CR>
 
 " Load Eclim Settings
-if filereadable($HOME . "/.viis/.vimrc-eclim")
+if filereadable($HOME . "/.vim/.vimrc-eclim")
 	source ~/.vim/.vimrc-eclim
-    let g:EclimCompletionMethod = 'omnifunc'
 endif
 
+"Autocomplete and deoplete setup
 set completeopt=longest,menuone,preview
+let g:EclimCompletionMethod = 'omnifunc'
 autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
-let g:SuperTabDefaultCompletionType = 'context'
-" let g:SuperTabMappingForward = '<nul>'
-" let g:SuperTabMappingBackward = '<s-nul>'
-let g:SuperTabDefaultCompletionType = "<c-x><c-u>"
-let g:SuperTabCrMapping=1
 " setting this makes supertab not work let g:UltiSnipsExpandTrigger="<C-j>"
+let g:UltiSnipsExpandTrigger="<C-j>"
 let g:UltiSnipsListSnippets="<C-l>"
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#complete_method = "completefunc"
 let g:deoplete#enable_camel_case = 1
+" <CR>: close popup and save indent.
+inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+function! s:my_cr_function() abort
+  return deoplete#close_popup() 
+endfunction
+" https://github.com/Shougo/deoplete.nvim/issues/100
+" use tab to forward cycle
+" inoremap <silent><expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
+" use tab to backward cycle
+" inoremap <silent><expr><s-tab> pumvisible() ? "\<c-p>" : "\<s-tab>"
+let g:deoplete#omni#input_patterns = {}
+let g:deoplete#omni#input_patterns.java = '[^. *\t]\.\w*'
+" Lazy load Deoplete to reduce statuptime
+" See manpage
+" Enable deoplete when InsertEnter.
+let g:deoplete#enable_at_startup = 0
+autocmd InsertEnter * call deoplete#enable()
+
 
 let g:fzf_launcher='xfce4-terminal -x sh -c %s'
 let g:fzf_command_prefix='Fz'
