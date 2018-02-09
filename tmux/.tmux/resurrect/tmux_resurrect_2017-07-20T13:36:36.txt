@@ -1,3 +1,0 @@
-pane	gradle	1	:vim	1	:*	0	:/home/osboxes/dev/repo/repo1/prpc-platform	1	vim	:vim mybuild.gradle build.gradle settings.gradle
-window	gradle	1	1	:*	bebd,190x54,0,0,0
-state	gradle	

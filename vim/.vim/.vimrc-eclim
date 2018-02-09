@@ -1,17 +1,49 @@
 let g:EclimCompletionMethod = 'omnifunc'
 
-" Enable heavy omni completion.
-if !exists('g:neocomplete#sources#omni#input_patterns')
-  let g:neocomplete#sources#omni#input_patterns = {}
-endif
-"let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
-"let g:neocomplete#sources#omni#input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
-"let g:neocomplete#sources#omni#input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
+" let g:deoplete#omni#functions = {}
+sss" let g:deoplete#omni#functions.java = [
+"     \ 'eclim#java#complete#CodeComplete'
+"     \]
+" let g:deoplete#omni#input_patterns = {}
+" let g:deoplete#omni#input_patterns.java = '[^. *\t]\.\w*'
+ " Autoclose preview windows
+" https://github.com/Shougo/deoplete.nvim/issues/115
+set completeopt=longest,menuone,preview
+"let g:deoplete#sources = {}
+"let g:deoplete#sources['java'] = ['file', 'ultisnips', 'ternjs']
+autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
 
-" For perlomni.vim setting.
-" https://github.com/c9s/perlomni.vim
-"let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
-let g:neocomplete#sources#omni#input_patterns.java = '\k\.\k*'
+" https://github.com/Shougo/deoplete.nvim/issues/100
+" use tab to forward cycle
+" inoremap <silent><expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
+" use tab to backward cycle
+" inoremap <silent><expr><s-tab> pumvisible() ? "\<c-p>" : "\<s-tab>"
 
-let g:EclimJavaSearchSingleResult='edit'
-let g:EclimFileTypeValidate = 0
+" Lazy load Deoplete to reduce statuptime
+" See manpage
+" Enable deoplete when InsertEnter.
+"let g:deoplete#enable_at_startup = 0
+"autocmd InsertEnter * call deoplete#enable()
+
+""Ctrl space mapping
+"inoremap <expr> <C-Space> pumvisible() \|\| &omnifunc == '' ?
+"      \ "\<lt>C-n>" :
+"      \ "\<lt>C-x>\<lt>C-o><c-r>=pumvisible() ?" .
+"      \ "\"\\<lt>c-n>\\<lt>c-p>\\<lt>c-n>\" :" .
+"      \ "\" \\<lt>bs>\\<lt>C-n>\"\<CR>"
+"imap <C-@> <C-Space>
+
+
+
+"let g:EclimJavaSearchSingleResult='edit'
+"let g:EclimFileTypeValidate = 0
+
+"autocmd FileType java let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
+let g:UltiSnipsExpandTrigger="<C-j>"
+let g:UltiSnipsListSnippets="<C-l>"
+" close the preview window when you're not using it
+let g:SuperTabClosePreviewOnPopupClose = 1
+let g:SuperTabDefaultCompletionType = 'context'
+"call deoplete#custom#set('ultisnips', 'matchers', ['matcher_fuzzy'])
+let g:SuperTabMappingForward = '<tab>'
+

@@ -1,5 +1,0 @@
-pane	gradle	1	:vim	1	:*	0	:/home/osboxes/dev/repo/repo1/prpc-platform	1	vim	:vim test/pr3unittest/src/com/pega/pegarules/unittest/util/CoverageCollectorListener.java
-pane	jacoco	1	:vim	1	:*	0	:/home/osboxes/dev/repo/repo1/prpc-platform	1	vim	:vim test/pr3unittest/src/com/pega/pegarules/unittest/util/CoverageCollectorListener.java
-window	gradle	1	1	:*	bebd,190x54,0,0,0
-window	jacoco	1	1	:*	bebf,190x54,0,0,2
-state	jacoco	

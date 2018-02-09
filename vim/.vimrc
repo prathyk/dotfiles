@@ -77,8 +77,6 @@ set listchars=tab:>-,trail:·,eol:$
 nmap <silent> <leader>s :set nolist!<CR>
 
 " Buffer management
-nmap <C-h> :bp<CR>
-nmap <C-l> :bn<CR>
 nnoremap <silent> [b :bp<CR>
 nnoremap <silent> ]b :bn<CR>
 nnoremap <silent> [B :bfirst<CR>
@@ -153,12 +151,12 @@ endif
 """ Plugins
 call plug#begin('~/.vim/plugged')
 Plug 'airblade/vim-gitgutter'                           " Git hunks
-Plug 'w0rp/ale'
+Plug 'w0rp/ale'						" Async Lint
 
-Plug 'andschwa/vim-colors-solarized'                    " Best colors ever
 Plug 'flazz/vim-colorschemes'
+Plug 'altercation/vim-colors-solarized'                    " Best colors ever
 Plug 'felixhummel/setcolors.vim'
-Plug 'easymotion/vim-easymotion'                        " Movements
+"Plug 'easymotion/vim-easymotion'                        " Movements
 "Plug 'EinfachToll/DidYouMean'                           " File guessing
 Plug 'elzr/vim-json'                                    " Better JSON
 Plug 'majutsushi/tagbar'                                " Tagbar
@@ -173,8 +171,12 @@ Plug 'tpope/vim-commentary'                             " Comments
 Plug 'mhinz/vim-startify'
 " Plug 'tpope/vim-eunuch'                                 " UNIX commands
 Plug 'tpope/vim-fugitive'                               " Git interface
+"Plug 'zhaocai/GoldenView.Vim'
+Plug 'wesQ3/vim-windowswap'
 Plug 'MobiusHorizons/fugitive-stash.vim'
+Plug 'romgrk/winteract.vim'
 Plug 'tommcdo/vim-fubitive'
+Plug 'blueyed/vim-diminactive'
 Plug 'tpope/vim-repeat'                                 " Repeat for plugins
 Plug 'tpope/vim-scriptease'                             " VimL REPL
 Plug 'tpope/vim-unimpaired'                             " Unimparied
@@ -190,17 +192,26 @@ Plug 'vim-scripts/JavaDecompiler.vim'			" Jad Decompiler - needs jad on path
 Plug 'tfnico/vim-gradle'
 Plug 'tpope/vim-dispatch'
 "Plug 'artur-shaik/vim-javacomplete2'
-Plug 'Shougo/neocomplete.vim'
+Plug 'skywind3000/asyncrun.vim'
 Plug 'dhruvasagar/vim-table-mode'
 Plug 'szw/vim-maximizer'
 Plug 'severin-lemaignan/vim-minimap'
-if filereadable($HOME . "/.vim/.vimrc-neocomplete")
-	source ~/.vim/.vimrc-neocomplete
+"Auto complete and Snippets
+Plug 'metalelf0/supertab'
+if has('nvim')
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+else
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+  Plug 'roxma/nvim-yarp'
+  Plug 'roxma/vim-hug-neovim-rpc'
 endif
-" Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-" Plug 'cskeeters/jcall.vim'				" Java Call Hierarchy
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
+
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
+Plug 'prabirshrestha/async.vim'
+Plug 'prabirshrestha/vim-lsp'
 call plug#end()
 
 """ Plugin configurations
@@ -223,16 +234,7 @@ let g:gitgutter_override_sign_column_highlight = 0
 let g:vim_json_syntax_conceal = 0
 
 " just use :StripWhitespace
-let g:better_whitespace_enabled = 0
-
-" use ripgrep first
-let g:grepper = {'tools': ['rg', 'ag', 'git', 'grep']}
-
-" recognize all Markdown files
-autocmd BufNewFile,BufReadPost *.md set filetype=markdown
-let g:markdown_fenced_languages = ['c', 'cpp', 'csharp=cs', 'bash=sh', 'json']
-
-""" Other configurations
+let g:better_whitespace_enabled = 0 " use ripgrep first let g:grepper = {'tools': ['rg', 'ag', 'git', 'grep']} recognize all Markdown files autocmd BufNewFile,BufReadPost *.md set filetype=markdown let g:markdown_fenced_languages = ['c', 'cpp', 'csharp=cs', 'bash=sh', 'json'] """ Other configurations
 set hidden      " multiple buffers
 set ignorecase  " ignore case in searches
 set linebreak   " wrap after words
@@ -326,16 +328,29 @@ autocmd FileType java let b:ale_java_javac_classpath =
 
 
 " for fugitive stash
-let g:fugitive_stash_domains = ['http://meshgit', 'https://meshgit.pega.com/stash/projects/PRPC/repos/prpc-platform']
+let g:fugitive_stash_domains = ['http://git.pega.io', 'https://git.pega.io/projects/PRPC/repos/prpc-platform/browse']
 
 " for zoomwin
-nnoremap <silent> <C-w>m :ZoomWin<CR>
+nnoremap <silent> <leader>m :ZoomWin<CR>
 
 " Load Eclim Settings
-if filereadable($HOME . "/.vim/.vimrc-eclim")
+if filereadable($HOME . "/.viis/.vimrc-eclim")
 	source ~/.vim/.vimrc-eclim
+    let g:EclimCompletionMethod = 'omnifunc'
 endif
 
+set completeopt=longest,menuone,preview
+autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
+let g:SuperTabDefaultCompletionType = 'context'
+" let g:SuperTabMappingForward = '<nul>'
+" let g:SuperTabMappingBackward = '<s-nul>'
+let g:SuperTabDefaultCompletionType = "<c-x><c-u>"
+let g:SuperTabCrMapping=1
+" setting this makes supertab not work let g:UltiSnipsExpandTrigger="<C-j>"
+let g:UltiSnipsListSnippets="<C-l>"
+let g:deoplete#enable_at_startup = 1
+let g:deoplete#complete_method = "completefunc"
+let g:deoplete#enable_camel_case = 1
 
 let g:fzf_launcher='xfce4-terminal -x sh -c %s'
 let g:fzf_command_prefix='Fz'
@@ -345,3 +360,30 @@ let g:table_mode_corner='|'
 " Use filtered up and down in ex mode
 cnoremap <C-p> <Up>
 cnoremap <C-n> <Down>
+
+let g:ale_open_list=0
+nmap <leader>w :InteractiveWindow<CR>
+
+"Grepper mappings
+nmap gs  <plug>(GrepperOperator)
+xmap gs  <plug>(GrepperOperator)
+nnoremap <leader>ga :Grepper -tool ag -side<cr>
+nnoremap <leader>G :Grepper <cr>
+let g:grepper = { 'next_tool': '<leader>g' }
+nnoremap <leader>* :Grepper -tool ag -cword -noprompt<cr>
+nnoremap <leader>gb :Grepper -tool rg -buffers<cr>
+
+"DimInactive
+let g:diminactive_use_colorcolumn = 1
+let g:diminactive_enable_focus = 1
+let g:diminactive = 1
+let g:diminactive_use_syntax = 0
+
+
+au User lsp_setup call lsp#register_server({
+    \ 'name': 'jdt_language_server',
+    \ 'cmd': {server_info->[&shell, &shellcmdflag, 'java -Declipse.application=org.eclipse.jdt.ls.core.id1  -Dosgi.bundles.defaultStartLevel=4 -Declipse.product=org.eclipse.jdt.ls.core.product -noverify -Xmx1G -XX:+UseG1GC -XX:+UseStringDeduplication -jar /home/osboxes/dev/ecpse/tools/jdt-language-server-latest/plugins/org.eclipse.equinox.launcher_1.4.0.v20161219-1356.jar -configuration /home/osboxes/dev/ecpse/tools/jdt-language-server-latest/config_linux -data /home/osboxes/dev/ecpse/tools/jdt-language-server-latest/workspace']},
+    \ 'whitelist': ['java'],
+    \ })
+
+
