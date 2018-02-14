@@ -332,7 +332,7 @@ let g:deoplete#enable_camel_case = 1
 " <CR>: close popup and save indent.
 inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
 function! s:my_cr_function() abort
-  return deoplete#close_popup() 
+  return pumvisible() ? deoplete#close_popup() : "\<CR>"
 endfunction
 " https://github.com/Shougo/deoplete.nvim/issues/100
 " use tab to forward cycle
@@ -381,5 +381,6 @@ au User lsp_setup call lsp#register_server({
     \ 'cmd': {server_info->[&shell, &shellcmdflag, 'java -Declipse.application=org.eclipse.jdt.ls.core.id1  -Dosgi.bundles.defaultStartLevel=4 -Declipse.product=org.eclipse.jdt.ls.core.product -noverify -Xmx1G -XX:+UseG1GC -XX:+UseStringDeduplication -jar /home/osboxes/dev/ecpse/tools/jdt-language-server-latest/plugins/org.eclipse.equinox.launcher_1.4.0.v20161219-1356.jar -configuration /home/osboxes/dev/ecpse/tools/jdt-language-server-latest/config_linux -data /home/osboxes/dev/ecpse/tools/jdt-language-server-latest/workspace']},
     \ 'whitelist': ['java'],
     \ })
+
 
 
