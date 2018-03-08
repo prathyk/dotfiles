@@ -1,4 +1,5 @@
 
+"Some sensible defaults ---------{{{
 set nocompatible
 syntax on
 filetype on
@@ -55,19 +56,9 @@ else
   colorscheme desert
 end
 
-" Change <Leader>
-let mapleader = " "
-
 " Quick timeouts on key combinations.
 " set timeoutlen=300
 set timeoutlen=1000 ttimeoutlen=0
-
-
-"FZF
-let g:fzf_command_prefix='Fz'
-nmap <silent> <Leader>f :FzFiles<CR>
-nmap <silent> <Leader>b :FzBuffers<CR>
-nmap <silent> <Leader>c :FzCommands<CR>
 
 " Catch trailing whitespace
 set listchars=tab:>-,trail:·,eol:$
@@ -83,15 +74,61 @@ nnoremap <C-y> 3<C-y>
 vnoremap <C-e> 3<C-e>
 vnoremap <C-y> 3<C-y>
 
+" just use :StripWhitespace
+let g:better_whitespace_enabled = 0 " use ripgrep first let g:grepper = {'tools': ['rg', 'ag', 'git', 'grep']} recognize all Markdown files autocmd BufNewFile,BufReadPost *.md set filetype=markdown let g:markdown_fenced_languages = ['c', 'cpp', 'csharp=cs', 'bash=sh', 'json'] """ Other configurations
+set hidden      " multiple buffers
+set ignorecase  " ignore case in searches
+set linebreak   " wrap after words
+set smartcase   " match case once specified
+set spell       " always spell check
+set visualbell  " no sound
+set autowrite   " write files when leaving
+
+" configure wildmenu tab completion
+set wildmode=list:longest,full
+set wildignorecase
+
+if has('mouse')
+  set mouse=a
+endif
+
+let mapleader = " "
+"}}}
+
+
+"FZF -------{{{
+let g:fzf_command_prefix='Fz'
+nmap <silent> <Leader>f :FzFiles<CR>
+nmap <silent> <Leader>b :FzBuffers<CR>
+nmap <silent> <Leader>c :FzCommands<CR>
+
+" --column: Show column number
+" --line-number: Show line number
+" --no-heading: Do not show file headings in results
+" --fixed-strings: Search term as a literal string
+" --ignore-case: Case insensitive search
+" --no-ignore: Do not respect .gitignore, etc...
+" --hidden: Search hidden files and folders
+" --follow: Follow symlinks
+" --glob: Additional conditions for search (in this case ignore everything in the .git/ folder)
+" --color: Search color options
+
+command! -bang -nargs=* Find call fzf#vim#grep('runcached.py -c 3600 rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>), 1, <bang>0)
+let g:fzf_launcher='xfce4-terminal -x sh -c %s'
+let g:fzf_command_prefix='Fz'
+"}}}
+
 " % matches on if/else, html tags, etc.
 runtime macros/matchit.vim
 
-" Bash-like filename completion
+" Bash-like filename completion {{{
 set path+=**
 set wildmenu
 set wildmode=list:longest
 set wildignore=*.o,*.fasl
+"}}}
 
+"File formats {{{
 if has("autocmd")
 
   autocmd BufRead letter* set filetype=mail
@@ -112,19 +149,22 @@ if has("autocmd")
   au InsertLeave * silent execute "!sed -i.bak -e 's/TERMINAL_CURSOR_SHAPE_IBEAM/TERMINAL_CURSOR_SHAPE_BLOCK/' ~/.config/xfce4/terminal/terminalrc"                                  
   au VimLeave * silent execute "!sed -i.bak -e 's/TERMINAL_CURSOR_SHAPE_IBEAM/TERMINAL_CURSOR_SHAPE_BLOCK/' ~/.config/xfce4/terminal/terminalrc"  
 endif
-" Indent XML readably
+" }}}
+
+" Indent XML readably{{{
 function! DoPrettyXML()
 	1,$!xmllint --format --recover -
 	set filetype=xml
 endfunction
 command! PrettyXML call DoPrettyXML()
+"}}}
 
 " Load local settings
 if filereadable($HOME . "/.vimrc-local")
 	source ~/.vimrc-local
-endif
+endif"{{{}}}
 
-
+" Plugins -------------- {{{
 " Download vim-plug if not already installed
 if has('unix')
   if empty(glob('~/.vim/autoload/plug.vim'))
@@ -198,6 +238,7 @@ Plug 'junegunn/fzf.vim'
 Plug 'prabirshrestha/async.vim'
 Plug 'prabirshrestha/vim-lsp'
 call plug#end()
+"}}}
 
 """ Plugin configurations
 " GUI
@@ -209,41 +250,26 @@ if has('gui_running')
   endif
 endif
 
-" appearance
+" appearance {{{
 let g:solarized_termcolors=256
 silent! colorscheme solarized
 set background=dark
 let g:gitgutter_override_sign_column_highlight = 0
+"}}}
 
 " disable concealing in JSON
 let g:vim_json_syntax_conceal = 0
 
-" just use :StripWhitespace
-let g:better_whitespace_enabled = 0 " use ripgrep first let g:grepper = {'tools': ['rg', 'ag', 'git', 'grep']} recognize all Markdown files autocmd BufNewFile,BufReadPost *.md set filetype=markdown let g:markdown_fenced_languages = ['c', 'cpp', 'csharp=cs', 'bash=sh', 'json'] """ Other configurations
-set hidden      " multiple buffers
-set ignorecase  " ignore case in searches
-set linebreak   " wrap after words
-set smartcase   " match case once specified
-set spell       " always spell check
-set visualbell  " no sound
-set autowrite   " write files when leaving
-
-" configure wildmenu tab completion
-set wildmode=list:longest,full
-set wildignorecase
-
+" Persistent Undo {{{
 if has('persistent_undo')
   set undodir=~/.vim/undodir/
   silent call system('mkdir -p ' . &undodir)
   set undofile
 endif
+"}}}
 
-if has('mouse')
-  set mouse=a
-endif
 
-let mapleader = " "
-
+" Last known cursor position {{{
 " When editing a file, always jump to the last known cursor position.
 " Don't do it when the position is invalid or when inside an event handler
 " (happens when dropping a file on gvim).
@@ -251,22 +277,11 @@ autocmd BufReadPost *
       \ if line("'\"") >= 1 && line("'\"") <= line("$") |
       \   exe "normal! g`\"" |
       \ endif
+"}}}
 
 " Load local configurations if available
 silent! source ~/.vim/local.vim
 silent! source ~/.vim/functions.vim
-" --column: Show column number
-" --line-number: Show line number
-" --no-heading: Do not show file headings in results
-" --fixed-strings: Search term as a literal string
-" --ignore-case: Case insensitive search
-" --no-ignore: Do not respect .gitignore, etc...
-" --hidden: Search hidden files and folders
-" --follow: Follow symlinks
-" --glob: Additional conditions for search (in this case ignore everything in the .git/ folder)
-" --color: Search color options
-
-command! -bang -nargs=* Find call fzf#vim#grep('runcached.py -c 3600 rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>), 1, <bang>0)
 set grepprg=rg\ --vimgrep
 
 set tabstop=4
@@ -274,7 +289,7 @@ set softtabstop=4
 set shiftwidth=4
 
 
-" Syntastic related settings
+" Syntastic related settings {{{
 set statusline+=%#warningmsg#
 set statusline+=%{ALEGetStatusLine()}
 set statusline+=%*
@@ -307,6 +322,7 @@ autocmd FileType java let b:ale_java_javac_classpath =
 "autocmd FileType java let b:JavaComplete_LibsPath = g:syntastic_java_javac_classpath
 
 "au FileType java au BufEnter <buffer> let $CLASSPATH=g:JavaComplete_LibsPath . ":" .   g:JavaComplete_SourcesPath
+"}}}
 
 " for fugitive stash
 let g:fugitive_stash_domains = ['http://git.pega.io', 'https://git.pega.io/projects/PRPC/repos/prpc-platform/browse']
@@ -319,7 +335,7 @@ if filereadable($HOME . "/.vim/.vimrc-eclim")
 	source ~/.vim/.vimrc-eclim
 endif
 
-"Autocomplete and deoplete setup
+"Autocomplete and deoplete setup --------{{{
 set completeopt=longest,menuone,preview
 let g:EclimCompletionMethod = 'omnifunc'
 autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
@@ -346,10 +362,8 @@ let g:deoplete#omni#input_patterns.java = '[^. *\t]\.\w*'
 " Enable deoplete when InsertEnter.
 let g:deoplete#enable_at_startup = 0
 autocmd InsertEnter * call deoplete#enable()
+"}}}
 
-
-let g:fzf_launcher='xfce4-terminal -x sh -c %s'
-let g:fzf_command_prefix='Fz'
 let g:table_mode_corner='|'
 
 
@@ -360,7 +374,7 @@ cnoremap <C-n> <Down>
 let g:ale_open_list=0
 nmap <leader>w :InteractiveWindow<CR>
 
-"Grepper mappings
+"Grepper mappings {{{
 nmap gs  <plug>(GrepperOperator)
 xmap gs  <plug>(GrepperOperator)
 nnoremap <leader>ga :Grepper -tool ag -side<cr>
@@ -368,19 +382,40 @@ nnoremap <leader>G :Grepper <cr>
 let g:grepper = { 'next_tool': '<leader>g' }
 nnoremap <leader>* :Grepper -tool ag -cword -noprompt<cr>
 nnoremap <leader>gb :Grepper -tool rg -buffers<cr>
+"}}}
 
-"DimInactive
+"DimInactive {{{
 let g:diminactive_use_colorcolumn = 1
 let g:diminactive_enable_focus = 1
 let g:diminactive = 1
 let g:diminactive_use_syntax = 0
+"}}}
 
 
+"java lsp with eclipse lsp {{{
 au User lsp_setup call lsp#register_server({
     \ 'name': 'jdt_language_server',
     \ 'cmd': {server_info->[&shell, &shellcmdflag, 'java -Declipse.application=org.eclipse.jdt.ls.core.id1  -Dosgi.bundles.defaultStartLevel=4 -Declipse.product=org.eclipse.jdt.ls.core.product -noverify -Xmx1G -XX:+UseG1GC -XX:+UseStringDeduplication -jar /home/osboxes/dev/ecpse/tools/jdt-language-server-latest/plugins/org.eclipse.equinox.launcher_1.4.0.v20161219-1356.jar -configuration /home/osboxes/dev/ecpse/tools/jdt-language-server-latest/config_linux -data /home/osboxes/dev/ecpse/tools/jdt-language-server-latest/workspace']},
     \ 'whitelist': ['java'],
     \ })
+" }}}
 
 
+"Quickly edit my vimrc {{{
+nnoremap <leader>ev :vsplit ~/.vimrc<cr>
+nnoremap <leader>en :vsplit $MYVIMRC<cr>
+nnoremap <leader>sv :source $MYVIMRC<cr>
+"}}}
 
+inoremap jk <esc>
+inoremap <esc> <nop>
+"To make bg transparent
+"hi Normal guibg=NONE ctermbg=NONE
+
+
+" Vimscript file settings ---------------------- {{{
+augroup filetype_vim
+    autocmd!
+    autocmd FileType vim setlocal foldmethod=marker
+augroup END
+" }}}
