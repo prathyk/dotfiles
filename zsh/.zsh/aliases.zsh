@@ -5,6 +5,7 @@ alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo
 
 
 alias repo="cd /home/osboxes/dev/repo/repo1/prpc-platform"
+alias learn="cd /media/sf_Windows/Learning/repo"
 alias smarepo="cd /home/osboxes/dev/repo/repo1/chauv"
 alias dm="sudo systemctl restart  DavMail.service"
 export VISUAL=vim

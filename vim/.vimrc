@@ -180,7 +180,7 @@ endif
 
 """ Plugins
 call plug#begin('~/.vim/plugged')
-Plug 'airblade/vim-gitgutter'                           " Git hunks
+Plug 'airblade/vim-gitgutter', { 'on': ['GitGutterToggle' , 'GitGutterEnable'] } " Git hunks
 Plug 'w0rp/ale'						" Async Lint
 
 Plug 'flazz/vim-colorschemes'
@@ -197,13 +197,12 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'tmux-plugins/vim-tmux-focus-events'
 Plug 'tpope/vim-commentary'                             " Comments
 Plug 'mhinz/vim-startify'
-Plug 'tpope/vim-fugitive'                               " Git interface
+Plug 'tpope/vim-fugitive' | Plug 'MobiusHorizons/fugitive-stash.vim' | Plug 'tommcdo/vim-fubitive'
 Plug 'wesQ3/vim-windowswap'
-Plug 'MobiusHorizons/fugitive-stash.vim'
 Plug 'romgrk/winteract.vim'
-Plug 'tommcdo/vim-fubitive'
 Plug 'blueyed/vim-diminactive'
 Plug 'tpope/vim-repeat'                                 " Repeat for plugins
+Plug 'junegunn/vader.vim'                                 " Repeat for plugins
 Plug 'tpope/vim-scriptease'                             " VimL REPL
 Plug 'tpope/vim-unimpaired'                             " Unimparied
 Plug 'tpope/vim-sensible'                               " Sensible defaults
@@ -211,14 +210,16 @@ Plug 'tpope/vim-sleuth'                                 " Adaptive indentation
 Plug 'vim-scripts/ZoomWin'
 Plug 'tpope/vim-surround'                               " Surrounding
 Plug 'vim-airline/vim-airline'                          " Status line
-Plug 'vim-airline/vim-airline-themes'                   " Status line themes
+  Plug 'vim-airline/vim-airline-themes'                   " Status line themes
 Plug 'vim-scripts/JavaDecompiler.vim'			" Jad Decompiler - needs jad on path
 Plug 'tfnico/vim-gradle'
 Plug 'tpope/vim-dispatch'
 Plug 'skywind3000/asyncrun.vim'
 Plug 'dhruvasagar/vim-table-mode'
 Plug 'szw/vim-maximizer'
-Plug 'severin-lemaignan/vim-minimap'
+" Plug 'severin-lemaignan/vim-minimap'
+Plug 'prathyk/potion'
+"Plug '/media/sf_Windows/Learning/repo/practice/vim/potionplug'
 
 "Auto complete and Snippets
 "Plug 'metalelf0/supertab'
@@ -250,6 +251,63 @@ if has('gui_running')
   endif
 endif
 
+" gx to open plug page in browser {{{
+function! s:plug_gx()
+  let line = getline('.')
+  let sha  = matchstr(line, '^  \X*\zs\x\{7,9}\ze ')
+  let name = empty(sha) ? matchstr(line, '^[-x+] \zs[^:]\+\ze:')
+                      \ : getline(search('^- .*:$', 'bn'))[2:-2]
+  let uri  = get(get(g:plugs, name, {}), 'uri', '')
+  if uri !~ 'github.com'
+    return
+  endif
+  let repo = matchstr(uri, '[^:/]*/'.name)
+  let url  = empty(sha) ? 'https://github.com/'.repo
+                      \ : printf('https://github.com/%s/commit/%s', repo, sha)
+  call netrw#BrowseX(url, 0)
+endfunction
+
+augroup PlugGx
+  autocmd!
+  autocmd FileType vim nnoremap <buffer> <silent> gx :call <sid>plug_gx()<cr>
+augroup END
+" }}}
+
+
+" H to open help doc {{{
+function! s:plug_doc()
+  let name = matchstr(getline('.'), '^- \zs\S\+\ze:')
+  if has_key(g:plugs, name)
+    for doc in split(globpath(g:plugs[name].dir, 'doc/*.txt'), '\n')
+      execute 'tabe' doc
+    endfor
+  endif
+endfunction
+
+augroup PlugHelp
+  autocmd!
+  autocmd FileType vim nnoremap <buffer> <silent> <leader>h :call <sid>plug_doc()<cr>
+augroup END
+" }}}
+
+" PlugHelp fzf {{{
+function! s:plug_help_sink(line)
+  let dir = g:plugs[a:line].dir
+  for pat in ['doc/*.txt', 'README.md']
+    let match = get(split(globpath(dir, pat), "\n"), 0, '')
+    if len(match)
+      execute 'tabedit' match
+      return
+    endif
+  endfor
+  tabnew
+  execute 'Explore' dir
+endfunction
+
+command! PlugHelp call fzf#run(fzf#wrap({
+  \ 'source': sort(keys(g:plugs)),
+  \ 'sink':   function('s:plug_help_sink')}))
+" }}}
 " appearance {{{
 let g:solarized_termcolors=256
 silent! colorscheme solarized
@@ -399,6 +457,10 @@ au User lsp_setup call lsp#register_server({
     \ 'whitelist': ['java'],
     \ })
 " }}}
+" {{{ Insertmode shortcuts
+inoremap <c-u> <c-g>u<c-u>
+inoremap <c-w> <c-g>u<c-w>
+" }}}
 
 
 "Quickly edit my vimrc {{{
@@ -410,8 +472,25 @@ nnoremap <leader>sv :source $MYVIMRC<cr>
 inoremap jk <esc>
 inoremap <esc> <nop>
 "To make bg transparent
-"hi Normal guibg=NONE ctermbg=NONE
+function! s:ToggleTransparency()
+    if(exists("g:TransPrevValue"))
+      execute "hi Normal ctermbg=" . g:TransPrevValue
+      unlet g:TransPrevValue
+    else 
+      let g:TransPrevValue = synIDattr(synIDtrans(hlID('Normal')), 'bg') 
+      execute "hi Normal guibg=NONE ctermbg=NONE"
+    endif
+endfunction
+nmap <leader>t :call <SID>ToggleTransparency()<cr>
 
+" XML foldings {{{
+augroup XML
+    autocmd!
+    autocmd FileType xml let g:xml_syntax_folding=1
+    autocmd FileType xml setlocal foldmethod=syntax
+    autocmd FileType xml :syntax on
+augroup END
+" }}}
 
 " Vimscript file settings ---------------------- {{{
 augroup filetype_vim

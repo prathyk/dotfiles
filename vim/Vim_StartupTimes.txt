@@ -1,0 +1,177 @@
+562.488  152.951  VimEnter   autocommands
+132.865  124.115  001.756    sourcing      /home/osboxes/.config/nvim/init.vim
+132.820  122.359  055.707    sourcing      /home/osboxes/.vimrc
+401.793  078.687  opening    buffers
+312.044  061.785  loading    plugins
+180.863  046.142  012.770    sourcing      /home/osboxes/.vim/plugin/eclim.vim
+167.672  030.602  008.657    sourcing      /home/osboxes/.vim/eclim/plugin/eclim.vim
+278.372  028.889  004.613    sourcing      /home/osboxes/.vim/plugged/ultisnips/plugin/UltiSnips.vim
+274.976  024.183  024.183    sourcing      /usr/share/nvim/runtime/autoload/provider/python3.vim
+096.280  022.925  022.667    sourcing      /usr/share/nvim/runtime/filetype.vim
+030.420  018.199  003.108    sourcing      /usr/share/nvim/runtime/syntax/syntax.vim
+154.910  016.884  016.431    sourcing      /usr/share/nvim/runtime/autoload/provider/python.vim
+577.127  014.502  first      screen        update
+030.350  012.870  012.870    sourcing      /usr/share/nvim/runtime/filetype.vim
+118.114  009.821  009.363    sourcing      /home/osboxes/.vim/plugged/vim-colorschemes/colors/solarized.vim
+047.400  006.821  006.249    sourcing      /usr/share/nvim/runtime/colors/desert.vim
+105.479  005.808  005.444    sourcing      /home/osboxes/.vim/plugged/vim-colorschemes/colors/solarized.vim
+407.349  005.451  BufEnter   autocommands
+165.194  004.726  003.235    sourcing      /home/osboxes/.vim/eclim/autoload/eclim/util.vim
+228.802  004.592  004.533    sourcing      /home/osboxes/.vim/plugged/vim-sensible/plugin/sensible.vim
+132.869  004.204  sourcing   vimrc         file(s)
+195.663  004.131  003.920    sourcing      /home/osboxes/.vim/plugged/vim-grepper/plugin/grepper.vim
+222.501  003.929  003.929    sourcing      /home/osboxes/.vim/plugged/vim-unimpaired/plugin/unimpaired.vim
+187.444  003.924  003.581    sourcing      /home/osboxes/.vim/plugged/ale/plugin/ale.vim
+233.549  003.911  003.760    sourcing      /home/osboxes/.vim/plugged/vim-sleuth/plugin/sleuth.vim
+240.542  003.881  003.538    sourcing      /home/osboxes/.vim/plugged/vim-airline/plugin/airline.vim
+205.474  003.073  003.073    sourcing      /home/osboxes/.vim/plugged/vim-fugitive/plugin/fugitive.vim
+003.323  002.877  inits      1
+305.363  002.418  000.887    sourcing      /usr/share/nvim/runtime/plugin/rplugin.vim
+314.675  002.304  loading    after         plugins
+365.862  002.293  002.203    sourcing      /home/osboxes/.vim/plugged/vim-airline/autoload/airline/themes/dark.vim
+015.835  002.222  001.843    sourcing      /usr/share/nvim/runtime/syntax/synload.vim
+305.356  001.531  001.136    sourcing      /home/osboxes/.local/share/nvim/rplugin.vim
+163.884  001.492  001.492    sourcing      /home/osboxes/.vim/eclim/autoload/eclim/util.vim
+060.830  001.481  001.481    sourcing      /home/osboxes/.vim/autoload/plug.vim
+287.178  001.376  001.376    sourcing      /home/osboxes/.fzf/plugin/fzf.vim
+316.026  001.333  reading    ShaDa
+245.090  001.194  001.194    sourcing      /home/osboxes/.vim/plugged/asyncrun.vim/plugin/asyncrun.vim
+068.389  001.028  001.028    sourcing      /usr/share/nvim/runtime/ftoff.vim
+290.187  001.004  001.004    sourcing      /home/osboxes/.vim/plugged/fzf.vim/plugin/fzf.vim
+178.371  000.948  000.948    sourcing      /home/osboxes/.vim/eclim/plugin/settings_java.vim
+174.341  000.846  000.846    sourcing      /home/osboxes/.vim/eclim/plugin/project.vim
+190.689  000.819  000.819    sourcing      /home/osboxes/.vim/plugged/tagbar/plugin/tagbar.vim
+316.838  000.812  clearing   screen
+216.625  000.791  000.791    sourcing      /home/osboxes/.vim/plugged/vim-scriptease/plugin/scriptease.vim
+214.507  000.744  000.744    sourcing      /home/osboxes/.vim/plugged/vim-diminactive/plugin/diminactive.vim
+320.225  000.744  000.744    sourcing      /home/osboxes/.vim/eclim/autoload/eclim/display/signs.vim
+246.632  000.703  000.703    sourcing      /home/osboxes/.vim/plugged/vim-table-mode/plugin/table-mode.vim
+299.781  000.647  000.647    sourcing      /usr/share/nvim/runtime/plugin/matchit.vim
+004.550  000.609  init       highlight
+302.181  000.600  000.600    sourcing      /usr/share/nvim/runtime/plugin/netrwPlugin.vim
+003.880  000.545  parsing    arguments
+409.909  000.535  000.535    sourcing      /home/osboxes/.vim/plugged/vim-startify/autoload/startify.vim
+328.801  000.487  000.487    sourcing      /home/osboxes/.vim/plugged/ale/autoload/ale/linter.vim
+235.977  000.469  000.469    sourcing      /home/osboxes/.vim/plugged/vim-surround/plugin/surround.vim
+411.798  000.466  000.466    sourcing      /home/osboxes/.vim/plugged/ale/autoload/ale/engine.vim
+358.045  000.439  000.439    sourcing      /home/osboxes/.vim/plugged/vim-airline/autoload/airline/highlighter.vim
+413.517  000.414  000.414    sourcing      /home/osboxes/.vim/plugged/vim-startify/autoload/startify/fortune.vim
+000.446  000.406  locale     set
+559.114  000.401  000.401    sourcing      /home/osboxes/.vim/plugged/vim-lsp/autoload/lsp.vim
+305.262  000.395  000.395    sourcing      /usr/share/nvim/runtime/autoload/remote/define.vim
+015.640  000.379  000.379    sourcing      /usr/share/nvim/runtime/syntax/syncolor.vim
+154.723  000.366  000.366    sourcing      /usr/share/nvim/runtime/autoload/remote/host.vim
+196.698  000.364  000.364    sourcing      /home/osboxes/.vim/plugged/vim-better-whitespace/plugin/better-whitespace.vim
+136.300  000.345  000.345    sourcing      /home/osboxes/.vim/eclim/autoload/eclim.vim
+167.449  000.335  000.335    sourcing      /home/osboxes/.vim/eclim/autoload/eclim/common/buffers.vim
+330.721  000.322  000.322    sourcing      /home/osboxes/.vim/plugged/vim-airline/autoload/airline/extensions.vim
+326.015  000.293  000.293    sourcing      /home/osboxes/.vim/plugged/ale/autoload/ale/util.vim
+212.320  000.275  000.275    sourcing      /home/osboxes/.vim/plugged/winteract.vim/plugin/window-mode.vim
+525.109  000.270  000.270    sourcing      /home/osboxes/.vim/plugged/vim-startify/syntax/startify.vim
+115.894  000.244  000.244    sourcing      /usr/share/nvim/runtime/syntax/syncolor.vim
+185.022  000.230  000.230    sourcing      /home/osboxes/.vim/plugged/ale/autoload/ale.vim
+121.897  000.223  000.223    sourcing      /usr/share/nvim/runtime/syntax/syncolor.vim
+199.021  000.218  000.218    sourcing      /home/osboxes/.vim/plugged/vim-tmux-focus-events/plugin/tmux_focus_events.vim
+300.837  000.215  000.215    sourcing      /usr/share/nvim/runtime/plugin/matchparen.vim
+112.219  000.214  000.214    sourcing      /usr/share/nvim/runtime/syntax/syncolor.vim
+339.615  000.213  000.213    sourcing      /home/osboxes/.vim/plugged/vim-airline/autoload/airline/extensions/branch.vim
+195.528  000.211  000.211    sourcing      /home/osboxes/.vim/plugged/vim-repeat/autoload/repeat.vim
+197.878  000.208  000.208    sourcing      /home/osboxes/.vim/plugged/vim-tmux-navigator/plugin/tmux_navigator.vim
+046.847  000.206  000.206    sourcing      /usr/share/nvim/runtime/syntax/syncolor.vim
+296.383  000.206  000.206    sourcing      /usr/share/nvim/runtime/plugin/gzip.vim
+200.203  000.201  000.201    sourcing      /home/osboxes/.vim/plugged/vim-commentary/plugin/commentary.vim
+312.034  000.201  000.201    sourcing      /usr/share/nvim/runtime/plugin/zipPlugin.vim
+201.543  000.198  000.198    sourcing      /home/osboxes/.vim/plugged/vim-startify/plugin/startify.vim
+042.609  000.186  000.186    sourcing      /usr/share/nvim/runtime/syntax/syncolor.vim
+101.595  000.186  000.186    sourcing      /usr/share/nvim/runtime/syntax/syncolor.vim
+247.489  000.180  000.180    sourcing      /home/osboxes/.vim/plugged/vim-maximizer/plugin/maximizer.vim
+044.847  000.179  000.179    sourcing      /usr/share/nvim/runtime/syntax/syncolor.vim
+103.105  000.178  000.178    sourcing      /usr/share/nvim/runtime/syntax/syncolor.vim
+188.891  000.177  000.177    sourcing      /home/osboxes/.vim/plugged/setcolors.vim/plugin/setcolors.vim
+171.984  000.171  000.171    sourcing      /home/osboxes/.vim/eclim/plugin/java_tools.vim
+170.116  000.163  000.163    sourcing      /home/osboxes/.vim/eclim/plugin/ftdetect_jdt.vim
+243.154  000.162  000.162    sourcing      /home/osboxes/.vim/plugged/vim-dispatch/plugin/dispatch.vim
+176.055  000.159  000.159    sourcing      /home/osboxes/.vim/eclim/plugin/settings_groovy.vim
+308.732  000.157  000.157    sourcing      /usr/share/nvim/runtime/plugin/tarPlugin.vim
+379.809  000.151  000.151    sourcing      /home/osboxes/.vim/plugged/vim-airline/autoload/airline/builder.vim
+237.714  000.146  000.146    sourcing      /home/osboxes/.vim/plugged/vim-airline/autoload/airline.vim
+382.085  000.139  000.139    sourcing      /home/osboxes/.vim/plugged/vim-airline/autoload/airline/extensions/default.vim
+209.420  000.132  000.132    sourcing      /home/osboxes/.vim/plugged/vim-fubitive/plugin/fubitive.vim
+314.624  000.131  000.131    sourcing      /home/osboxes/.vim/plugged/ultisnips/after/plugin/UltiSnips_after.vim
+344.397  000.128  000.128    sourcing      /home/osboxes/.vim/plugged/vim-airline/autoload/airline/extensions/whitespace.vim
+234.701  000.125  000.125    sourcing      /home/osboxes/.vim/plugged/ZoomWin/plugin/ZoomWinPlugin.vim
+312.169  000.125  loading    packages
+292.462  000.123  000.123    sourcing      /home/osboxes/.vim/plugged/vim-lsp/plugin/lsp.vim
+309.911  000.118  000.118    sourcing      /usr/share/nvim/runtime/plugin/tohtml.vim
+187.215  000.114  000.114    sourcing      /home/osboxes/.vim/plugged/ale/autoload/ale/toggle.vim
+238.669  000.111  000.111    sourcing      /home/osboxes/.vim/plugged/vim-airline/autoload/airline/init.vim
+242.323  000.109  000.109    sourcing      /home/osboxes/.vim/plugged/JavaDecompiler.vim/plugin/jad.vim
+307.069  000.106  000.106    sourcing      /usr/share/nvim/runtime/plugin/shada.vim
+377.689  000.106  000.106    sourcing      /home/osboxes/.vim/plugged/vim-airline/autoload/airline/util.vim
+089.267  000.105  000.105    sourcing      /home/osboxes/.vim/plugged/vim-json/ftdetect/json.vim
+332.505  000.099  000.099    sourcing      /home/osboxes/.vim/plugged/vim-airline/autoload/airline/extensions/quickfix.vim
+560.500  000.099  000.099    sourcing      /home/osboxes/.vim/plugged/vim-lsp/autoload/lsp/utils.vim
+207.670  000.097  000.097    sourcing      /home/osboxes/.vim/plugged/fugitive-stash.vim/plugin/fugitive-stash.vim
+355.496  000.097  000.097    sourcing      /home/osboxes/.vim/plugged/vim-airline/autoload/airline/section.vim
+338.295  000.095  000.095    sourcing      /home/osboxes/.vim/plugged/vim-airline/autoload/airline/extensions/csv.vim
+563.485  000.095  000.095    sourcing      /home/osboxes/.vim/plugged/ale/autoload/ale/cursor.vim
+278.284  000.094  000.094    sourcing      /home/osboxes/.vim/plugged/ultisnips/autoload/UltiSnips/map_keys.vim
+336.846  000.093  000.093    sourcing      /home/osboxes/.vim/plugged/vim-airline/autoload/airline/extensions/tagbar.vim
+350.256  000.090  000.090    sourcing      /home/osboxes/.vim/plugged/vim-airline/autoload/airline/extensions/windowswap.vim
+365.412  000.090  000.090    sourcing      /home/osboxes/.vim/plugged/vim-airline/autoload/airline/themes.vim
+168.844  000.089  000.089    sourcing      /home/osboxes/.vim/eclim/plugin/ftdetect.vim
+138.976  000.086  000.086    sourcing      /usr/share/nvim/runtime/autoload/provider/pythonx.vim
+239.858  000.085  000.085    sourcing      /home/osboxes/.vim/plugged/vim-airline/autoload/airline/parts.vim
+248.521  000.084  000.084    sourcing      /home/osboxes/.vim/plugged/deoplete.nvim/plugin/deoplete.vim
+096.057  000.080  000.080    sourcing      /home/osboxes/.vim/plugged/ultisnips/ftdetect/snippets.vim
+298.164  000.076  000.076    sourcing      /usr/share/nvim/runtime/plugin/man.vim
+037.021  000.075  000.075    sourcing      /usr/share/nvim/runtime/ftplugin.vim
+343.052  000.073  000.073    sourcing      /home/osboxes/.vim/plugged/vim-airline/autoload/airline/extensions/ale.vim
+347.343  000.073  000.073    sourcing      /home/osboxes/.vim/plugged/vim-airline/autoload/airline/extensions/wordcount.vim
+340.829  000.072  000.072    sourcing      /home/osboxes/.vim/plugged/vim-airline/autoload/airline/extensions/fugitiveline.vim
+231.003  000.071  000.071    sourcing      /usr/share/nvim/runtime/indoff.vim
+313.434  000.071  000.071    sourcing      /home/osboxes/.vim/plugged/ale/after/plugin/ale.vim
+039.181  000.066  000.066    sourcing      /usr/share/nvim/runtime/indent.vim
+348.745  000.062  000.062    sourcing      /home/osboxes/.vim/plugged/vim-airline/autoload/airline/extensions/keymap.vim
+210.565  000.060  000.060    sourcing      /home/osboxes/.vim/plugged/vim-windowswap/plugin/WindowSwap.vim
+345.734  000.059  000.059    sourcing      /home/osboxes/.vim/plugged/vim-airline/autoload/airline/extensions/po.vim
+003.941  000.058  inits      2
+341.983  000.058  000.058    sourcing      /home/osboxes/.vim/plugged/vim-airline/autoload/airline/extensions/eclim.vim
+407.221  000.055  000.055    sourcing      /home/osboxes/.vim/plugged/ale/autoload/ale/events.vim
+283.287  000.054  000.054    sourcing      /home/osboxes/.vim/plugged/echodoc.vim/plugin/echodoc.vim
+233.495  000.052  000.052    sourcing      /usr/share/nvim/runtime/indent.vim
+404.582  000.051  000.051    sourcing      /home/osboxes/.vim/plugged/ale/autoload/ale/pattern_options.vim
+310.926  000.049  000.049    sourcing      /usr/share/nvim/runtime/plugin/tutor.vim
+180.082  000.048  000.048    sourcing      /home/osboxes/.vim/eclim/plugin/vimplugin.vim
+280.907  000.048  000.048    sourcing      /home/osboxes/.vim/plugged/vim-snippets/plugin/vimsnippets.vim
+182.214  000.044  000.044    sourcing      /home/osboxes/.vim/plugin/functional.vim
+334.065  000.043  000.043    sourcing      /home/osboxes/.vim/plugged/vim-airline/autoload/airline/extensions/netrw.vim
+091.603  000.041  000.041    sourcing      /home/osboxes/.vim/plugged/vim-tmux/ftdetect/tmux.vim
+132.600  000.041  000.041    sourcing      /home/osboxes/.vim/.vimrc-eclim
+000.039  000.039  ---        NVIM          STARTING                                                                             ---
+134.086  000.039  000.039    sourcing      /home/osboxes/.vim/plugin/CountSpaces.vim
+335.479  000.038  000.038    sourcing      /home/osboxes/.vim/plugged/vim-airline/autoload/airline/extensions/undotree.vim
+564.919  000.038  000.038    sourcing      /home/osboxes/.vim/plugged/vim-lsp/autoload/lsp/ui/vim/diagnostics/echo.vim
+131.124  000.036  000.036    sourcing      /home/osboxes/.vim/functions.vim
+035.424  000.035  000.035    sourcing      /usr/share/nvim/runtime/filetype.vim
+307.829  000.035  000.035    sourcing      /usr/share/nvim/runtime/plugin/spellfile.vim
+093.825  000.032  000.032    sourcing      /home/osboxes/.vim/plugged/vim-gradle/ftdetect/gradle.vim
+297.403  000.030  000.030    sourcing      /usr/share/nvim/runtime/plugin/health.vim
+227.069  000.028  000.028    sourcing      /usr/share/nvim/runtime/ftplugin.vim
+232.177  000.027  000.027    sourcing      /usr/share/nvim/runtime/filetype.vim
+038.137  000.023  000.023    sourcing      /usr/share/nvim/runtime/filetype.vim
+241.431  000.022  000.022    sourcing      /home/osboxes/.vim/plugged/vim-airline-themes/plugin/airline-themes.vim
+294.926  000.021  000.021    sourcing      /usr/share/nvim/runtime/plugin/gui_shim.vim
+306.237  000.020  000.020    sourcing      /usr/share/nvim/runtime/plugin/rrhelper.vim
+032.986  000.019  000.019    sourcing      /usr/share/nvim/runtime/filetype.vim
+056.992  000.018  000.018    sourcing      /usr/share/nvim/runtime/macros/matchit.vim
+225.758  000.018  000.018    sourcing      /usr/share/nvim/runtime/filetype.vim
+314.693  000.018  inits      3
+098.757  000.017  000.017    sourcing      /usr/share/nvim/runtime/indent.vim
+097.721  000.015  000.015    sourcing      /usr/share/nvim/runtime/ftplugin.vim
+228.135  000.014  000.014    sourcing      /usr/share/nvim/runtime/indent.vim
+003.335  000.012  window     checked
+577.132  000.005  ---        NVIM          STARTED                                                                              ---
+562.492  000.004  before     starting      main                                                                                 loop
+003.883  000.003  expanding  arguments
+407.352  000.003  editing    files         in                                                                                   windows
