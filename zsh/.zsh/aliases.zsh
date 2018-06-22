@@ -17,3 +17,5 @@ alias gbranch="git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/
 
 alias syncRules="./gradlew syncToRuleBaseAll -PdatabaseProperties=\"/home/osboxes/dev/repo/repo1/prpc-platform/myDB.properties\""
 alias syncRulesMain="./gradlew syncToRuleBaseMain -PdatabaseProperties=\"/home/osboxes/dev/repo/repo1/prpc-platform/myDB.properties\""
+alias mux="tmuxinator"
+

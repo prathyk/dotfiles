@@ -145,9 +145,12 @@ if has("autocmd")
   autocmd FileType r set ts=2 shiftwidth=2 expandtab
   autocmd BufReadPre viper,.viper set filetype=lisp
   autocmd FileType tex set ts=2 shiftwidth=2 expandtab
-  au InsertEnter * silent execute "!sed -i.bak -e 's/TERMINAL_CURSOR_SHAPE_BLOCK/TERMINAL_CURSOR_SHAPE_IBEAM/' ~/.config/xfce4/terminal/terminalrc"                                  
-  au InsertLeave * silent execute "!sed -i.bak -e 's/TERMINAL_CURSOR_SHAPE_IBEAM/TERMINAL_CURSOR_SHAPE_BLOCK/' ~/.config/xfce4/terminal/terminalrc"                                  
+  au InsertEnter * silent execute "!sed -i.bak -e 's/TERMINAL_CURSOR_SHAPE_BLOCK/TERMINAL_CURSOR_SHAPE_IBEAM/' ~/.config/xfce4/terminal/terminalrc" 
+  au InsertLeave * silent execute "!sed -i.bak -e 's/TERMINAL_CURSOR_SHAPE_IBEAM/TERMINAL_CURSOR_SHAPE_BLOCK/' ~/.config/xfce4/terminal/terminalrc" 
   au VimLeave * silent execute "!sed -i.bak -e 's/TERMINAL_CURSOR_SHAPE_IBEAM/TERMINAL_CURSOR_SHAPE_BLOCK/' ~/.config/xfce4/terminal/terminalrc"  
+  au InsertEnter * silent execute "!gconftool-2 -s /apps/guake/style/cursor_shape --type integer 1" 
+  au InsertLeave * silent execute "!gconftool-2 -s /apps/guake/style/cursor_shape --type integer 0" 
+  au VimLeave * silent execute "!gconftool-2 -s /apps/guake/style/cursor_shape --type integer 0"  
 endif
 " }}}
 

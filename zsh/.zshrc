@@ -1,4 +1,4 @@
-source $HOME/.antigenrc
+source ~/zshrc.zsh
 source ~/.zsh/aliases.zsh
 source ~/.zsh/keybindings.zsh
 source ~/.zsh/functionDefs.zsh
@@ -19,6 +19,10 @@ export VTE_VERSION="100"
 # --follow: Follow symlinks
 # --glob: Additional conditions for search (in this case ignore everything in the .git/ folder)
 
+export FZF_DEFAULT_OPTS="--bind 'f1:execute(less -f {}),ctrl-y:execute-silent(echo {} | xclip)+abort'"
 export FZF_DEFAULT_COMMAND='runcached.py -cd 3600 rg --files --no-ignore --hidden --follow --glob "!.git/*"'
 #export FZF_DEFAULT_COMMAND='(runcached.py -cd 3600 git ls-tree -r --name-only HEAD || runcached.py -cd 3600 rg --files --no-ignore --hidden --follow --glob "!.git/*")'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+
+
+
