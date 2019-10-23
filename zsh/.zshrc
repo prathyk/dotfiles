@@ -9,7 +9,6 @@ SAVEHIST=1000
 
 export EDITOR=/usr/bin/vim
 export CHEATCOLORS=true
-export VTE_VERSION="100"
 
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh && source ~/.fzf-extra.sh && source ~/.fzf-extra.zsh
@@ -23,6 +22,14 @@ export FZF_DEFAULT_OPTS="--bind 'f1:execute(less -f {}),ctrl-y:execute-silent(ec
 export FZF_DEFAULT_COMMAND='runcached.py -cd 3600 rg --files --no-ignore --hidden --follow --glob "!.git/*"'
 #export FZF_DEFAULT_COMMAND='(runcached.py -cd 3600 git ls-tree -r --name-only HEAD || runcached.py -cd 3600 rg --files --no-ignore --hidden --follow --glob "!.git/*")'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+export PATH=$PATH:/opt/gradle/gradle-4.10.1/bin
 
 
 
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="/home/osboxes/.sdkman"
+[[ -s "/home/osboxes/.sdkman/bin/sdkman-init.sh" ]] && source "/home/osboxes/.sdkman/bin/sdkman-init.sh"
+
+#if command -v tmux &> /dev/null && [ -z "$TMUX" ]; then
+#    tmux attach -t default || tmux new -s default
+#fi

@@ -12,6 +12,7 @@ set matchtime=0
 set shortmess=atI
 set ruler
 set showcmd
+set confirm
 
 set sidescroll=1
 set sidescrolloff=3
@@ -44,6 +45,7 @@ set hidden
 
 " Look for the file in the current directory, then south until you reach home.
 set tags=tags;~/
+set tags^=./.git/tags
 
 " Who needs .gvimrc?
 if has('gui_running')
@@ -74,6 +76,10 @@ nnoremap <C-y> 3<C-y>
 vnoremap <C-e> 3<C-e>
 vnoremap <C-y> 3<C-y>
 
+set tabstop=4
+set softtabstop=4
+set shiftwidth=4
+
 " just use :StripWhitespace
 let g:better_whitespace_enabled = 0 " use ripgrep first let g:grepper = {'tools': ['rg', 'ag', 'git', 'grep']} recognize all Markdown files autocmd BufNewFile,BufReadPost *.md set filetype=markdown let g:markdown_fenced_languages = ['c', 'cpp', 'csharp=cs', 'bash=sh', 'json'] """ Other configurations
 set hidden      " multiple buffers
@@ -98,9 +104,12 @@ let mapleader = " "
 
 "FZF -------{{{
 let g:fzf_command_prefix='Fz'
-nmap <silent> <Leader>f :FzFiles<CR>
+nmap <silent> <Leader>f :FzGitFiles<CR>
 nmap <silent> <Leader>b :FzBuffers<CR>
 nmap <silent> <Leader>c :FzCommands<CR>
+nmap <silent> <Leader>w :FzCFiles<CR>
+
+command! -bang -nargs=? -complete=dir CFiles call fzf#vim#files('.', {'options':'--query '.expand('<cword>')})
 
 " --column: Show column number
 " --line-number: Show line number
@@ -132,7 +141,6 @@ set wildignore=*.o,*.fasl
 if has("autocmd")
 
   autocmd BufRead letter* set filetype=mail
-
   autocmd Filetype mail set fo -=l autoindent spell
 
   autocmd Filetype sh set ts=4 shiftwidth=2 expandtab
@@ -162,10 +170,11 @@ endfunction
 command! PrettyXML call DoPrettyXML()
 "}}}
 
-" Load local settings
+" Load local settings {{{
 if filereadable($HOME . "/.vimrc-local")
 	source ~/.vimrc-local
 endif"{{{}}}
+" }}}
 
 " Plugins -------------- {{{
 " Download vim-plug if not already installed
@@ -199,6 +208,7 @@ Plug 'tmux-plugins/vim-tmux'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'tmux-plugins/vim-tmux-focus-events'
 Plug 'tpope/vim-commentary'                             " Comments
+Plug 'tpope/vim-abolish'                             " Abbrev, Substitute and coerce
 Plug 'mhinz/vim-startify'
 Plug 'tpope/vim-fugitive' | Plug 'MobiusHorizons/fugitive-stash.vim' | Plug 'tommcdo/vim-fubitive'
 Plug 'wesQ3/vim-windowswap'
@@ -219,20 +229,18 @@ Plug 'tfnico/vim-gradle'
 Plug 'tpope/vim-dispatch'
 Plug 'skywind3000/asyncrun.vim'
 Plug 'dhruvasagar/vim-table-mode'
+Plug 'nelstrom/vim-visual-star-search'
 Plug 'szw/vim-maximizer'
 " Plug 'severin-lemaignan/vim-minimap'
 Plug 'prathyk/potion'
+Plug 'tommcdo/vim-exchange'
+Plug 'wlangstroth/vim-racket'
+Plug 'eraserhd/parinfer-rust', {'do':
+        \  'cargo build --release'}
 "Plug '/media/sf_Windows/Learning/repo/practice/vim/potionplug'
 
 "Auto complete and Snippets
 "Plug 'metalelf0/supertab'
-if has('nvim')
-  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-else
-  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-  Plug 'roxma/nvim-yarp'
-  Plug 'roxma/vim-hug-neovim-rpc'
-endif
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'Shougo/echodoc.vim'
@@ -244,7 +252,7 @@ Plug 'prabirshrestha/vim-lsp'
 call plug#end()
 "}}}
 
-""" Plugin configurations
+""" Plugin configurations {{{
 " GUI
 if has('gui_running')
   if has('gui_gtk')
@@ -311,6 +319,8 @@ command! PlugHelp call fzf#run(fzf#wrap({
   \ 'source': sort(keys(g:plugs)),
   \ 'sink':   function('s:plug_help_sink')}))
 " }}}
+" }}}
+"
 " appearance {{{
 let g:solarized_termcolors=256
 silent! colorscheme solarized
@@ -345,9 +355,6 @@ silent! source ~/.vim/local.vim
 silent! source ~/.vim/functions.vim
 set grepprg=rg\ --vimgrep
 
-set tabstop=4
-set softtabstop=4
-set shiftwidth=4
 
 
 " Syntastic related settings {{{
@@ -418,11 +425,6 @@ endfunction
 " inoremap <silent><expr><s-tab> pumvisible() ? "\<c-p>" : "\<s-tab>"
 let g:deoplete#omni#input_patterns = {}
 let g:deoplete#omni#input_patterns.java = '[^. *\t]\.\w*'
-" Lazy load Deoplete to reduce statuptime
-" See manpage
-" Enable deoplete when InsertEnter.
-let g:deoplete#enable_at_startup = 0
-autocmd InsertEnter * call deoplete#enable()
 "}}}
 
 let g:table_mode_corner='|'
@@ -438,9 +440,11 @@ nmap <leader>w :InteractiveWindow<CR>
 "Grepper mappings {{{
 nmap gs  <plug>(GrepperOperator)
 xmap gs  <plug>(GrepperOperator)
-nnoremap <leader>ga :Grepper -tool ag -side<cr>
+nmap gbs  <plug>(GrepperOperator)
+xmap gbs  <plug>(GrepperOperator)
+nnoremap <leader>ga :Grepper -tool rg -side<cr>
 nnoremap <leader>G :Grepper <cr>
-let g:grepper = { 'next_tool': '<leader>g' }
+let g:grepper = { 'next_tool': '<leader>g', 'open': '1', 'side': 1 }
 nnoremap <leader>* :Grepper -tool ag -cword -noprompt<cr>
 nnoremap <leader>gb :Grepper -tool rg -buffers<cr>
 "}}}
@@ -456,15 +460,19 @@ let g:diminactive_use_syntax = 0
 "java lsp with eclipse lsp {{{
 au User lsp_setup call lsp#register_server({
     \ 'name': 'jdt_language_server',
-    \ 'cmd': {server_info->[&shell, &shellcmdflag, 'java -Declipse.application=org.eclipse.jdt.ls.core.id1  -Dosgi.bundles.defaultStartLevel=4 -Declipse.product=org.eclipse.jdt.ls.core.product -noverify -Xmx1G -XX:+UseG1GC -XX:+UseStringDeduplication -jar /home/osboxes/dev/ecpse/tools/jdt-language-server-latest/plugins/org.eclipse.equinox.launcher_1.4.0.v20161219-1356.jar -configuration /home/osboxes/dev/ecpse/tools/jdt-language-server-latest/config_linux -data /home/osboxes/dev/ecpse/tools/jdt-language-server-latest/workspace']},
+    \ 'cmd': {server_info->[&shell, &shellcmdflag, 'java -Declipse.application=org.eclipse.jdt.ls.core.id1  -Dosgi.bundles.defaultStartLevel=4 -Declipse.product=org.eclipse.jdt.ls.core.product -noverify -Xmx4G -XX:+UseG1GC -XX:+UseStringDeduplication -jar /home/osboxes/dev/ecpse/tools/jdt-language-server-latest/plugins/org.eclipse.equinox.launcher_1.4.0.v20161219-1356.jar -configuration /home/osboxes/dev/ecpse/tools/jdt-language-server-latest/config_linux -data /home/osboxes/dev/ecpse/tools/jdt-language-server-latest/workspace']},
     \ 'whitelist': ['java'],
     \ })
+let g:lsp_log_verbose = 1
+let g:lsp_log_file = expand('~/vim-lsp.log')
+
+" for asyncomplete.vim log
+let g:asyncomplete_log_file = expand('~/asyncomplete.log')
 " }}}
 " {{{ Insertmode shortcuts
 inoremap <c-u> <c-g>u<c-u>
 inoremap <c-w> <c-g>u<c-w>
 " }}}
-
 
 "Quickly edit my vimrc {{{
 nnoremap <leader>ev :vsplit ~/.vimrc<cr>
@@ -492,6 +500,7 @@ augroup XML
     autocmd FileType xml let g:xml_syntax_folding=1
     autocmd FileType xml setlocal foldmethod=syntax
     autocmd FileType xml :syntax on
+    autocmd FileType xml :normal zR 
 augroup END
 " }}}
 
@@ -501,3 +510,13 @@ augroup filetype_vim
     autocmd FileType vim setlocal foldmethod=marker
 augroup END
 " }}}
+" {{{ terminal
+  tnoremap <Esc> <C-\><C-n>
+  inoremap <C-h> <C-\><C-N><C-w>h
+  inoremap <C-j> <C-\><C-N><C-w>j
+  inoremap <C-k> <C-\><C-N><C-w>k
+  inoremap <C-l> <C-\><C-N><C-w>l
+
+"
+set guicursor=
+autocmd OptionSet guicursor noautocmd set guicursor=

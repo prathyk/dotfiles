@@ -42,7 +42,7 @@ cmd=" ".join(sys.argv[argskip:])
 
 #hash of executed command w/args
 m = hashlib.md5()
-m.update(cmd+cwd)
+m.update((cmd+cwd).encode("utf8"))
 cmdmd5=m.hexdigest()
 
 

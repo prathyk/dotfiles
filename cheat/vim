@@ -56,6 +56,7 @@ d{motion}       delete text that {motion} moves over
 :s/foo/bar/g	replace all matches (`g` flag) of 'foo' with 'bar' on the current line only
 :%s/foo/bar/g	replace all matches of 'foo' with 'bar' in the entire file (`:%s`)
 :%s/foo/bar/gc	ask to manually confirm (`c` flag) each replacement 
+:%s/\%vfoo/bar/gc	Search and replace within a visual selection
 
 # Preceding a motion or edition with a number repeats it 'n' times
 # Examples:
@@ -63,3 +64,7 @@ d{motion}       delete text that {motion} moves over
 2dw         deletes 2 words
 5yy         copies 5 lines
 42G         go to line 42
+
+# navigating
+`Ctrl-o`, `Ctrl-i`  To navigate between different `:jumps`
+`g;`, `g,`          To navigate between different `:changes`
