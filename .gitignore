@@ -1,1 +1,9 @@
 /tmux/.tmux/
+fish/completions/
+fish/conf.d/
+fish/fish_variables
+fish/functions/
+vim/.vim/autoload/
+vim/.vim/plugged/
+vim/.vim/undodir/
+
