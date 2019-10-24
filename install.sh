@@ -11,3 +11,5 @@ stow -t ~ tmux
 stow -t ~ vim
 stow -t ~ vimperator
 stow -t ~ zsh
+stow -t ~/.config fisher
+stow -t ~/.config fish
