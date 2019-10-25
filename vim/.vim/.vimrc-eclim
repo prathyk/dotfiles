@@ -1,9 +1,0 @@
-let g:EclimCompletionMethod = 'omnifunc'
-let g:EclimJavaSearchSingleResult='edit'
-let g:EclimFileTypeValidate = 0
-
-nnoremap <leader>jsi :JavaSearch -p <C-R><C-W> -t method -x implementors<CR>
-nnoremap <leader>jsr :JavaSearch -p <C-R><C-W> -x references<CR>
-
-
-
