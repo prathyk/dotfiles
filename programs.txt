@@ -1,0 +1,6 @@
+nvim
+cheat
+git
+idea
+stow
+

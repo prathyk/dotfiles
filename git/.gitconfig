@@ -5,6 +5,7 @@
 	longpaths = true
 	autocrlf = input
 	safecrlf = true
+	editor = nvim
 [merge]
 	renormalize = true
 [rerere]
