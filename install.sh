@@ -14,6 +14,11 @@ base=(
 	vim
 	vimperator
 	zsh
+	i3
+	i3status
+	dunst
+	wallpaper
+	xsettings
 )
 
 # folders that should, or only need to be installed for a local user

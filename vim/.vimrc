@@ -223,6 +223,7 @@ Plug 'tpope/vim-sensible'                               " Sensible defaults
 Plug 'tpope/vim-sleuth'                                 " Adaptive indentation
 Plug 'vim-scripts/ZoomWin'
 Plug 'tpope/vim-surround'                               " Surrounding
+Plug 'tpope/vim-obsession'                               " Surrounding
 Plug 'vim-airline/vim-airline'                          " Status line
   Plug 'vim-airline/vim-airline-themes'                   " Status line themes
 Plug 'vim-scripts/JavaDecompiler.vim'			" Jad Decompiler - needs jad on path
