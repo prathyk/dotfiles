@@ -19,6 +19,7 @@ base=(
 	dunst
 	wallpaper
 	xsettings
+	polybar
 )
 
 # folders that should, or only need to be installed for a local user

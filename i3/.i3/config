@@ -202,26 +202,28 @@ bindsym $mod+r mode "resize"
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 # panel
-bar {
-        colors {
-        background #2f343f
-        statusline #2f343f
-        separator #4b5262
+# bar {
+#         colors {
+#         background #2f343f
+#         statusline #2f343f
+#         separator #4b5262
 
-        # colour of border, background, and text
-        focused_workspace       #2f343f #bf616a #d8dee8
-        active_workspace        #2f343f #2f343f #d8dee8
-        inactive_workspace      #2f343f #2f343f #d8dee8
-        urgent_workspacei       #2f343f #ebcb8b #2f343f
-    }
-        status_command LC_ALL=C i3status
-}
+#         # colour of border, background, and text
+#         focused_workspace       #2f343f #bf616a #d8dee8
+#         active_workspace        #2f343f #2f343f #d8dee8
+#         inactive_workspace      #2f343f #2f343f #d8dee8
+#         urgent_workspacei       #2f343f #ebcb8b #2f343f
+#     }
+#         status_command LC_ALL=C statusline i3status
+# }
 
 #autostart
 exec --no-startup-id hsetroot -center ~/wallpaper.png
 exec --no-startup-id xsettingsd &
 exec killall -q notifyd
 exec --no-startup-id dunst -onfig ~/.config/dunst/dunstrc
+exec_always --no-startup-id $HOME/.config/polybar/launch.sh
+
 
 # common apps keybinds
 bindsym Print exec scrot 'Cheese_%a-%d%b%y_%H.%M.png' -e 'viewnior ~/$f'
