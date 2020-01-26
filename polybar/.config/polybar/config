@@ -57,7 +57,7 @@ font-2 = siji:pixelsize=10;1
 
 modules-left = i3
 modules-center = i3-windows
-modules-right = memory cpu eth battery date powermenu
+modules-right = memory cpu eth battery date powermenu popup-calendar
 
 tray-position = right
 tray-padding = 2
@@ -413,6 +413,12 @@ menu-2-1-exec = menu-open-0
 type = custom/script
 exec = ~/.config/polybar/modules/polybar-i3-windows/module.py
 tail = true
+
+[module/popup-calendar]
+type = custom/script
+exec = ~/.config/polybar/polybar-scripts/polybar-scripts/popup-calendar/popup-calendar.sh
+interval = 5
+click-left = ~/.config/polybar/polybar-scripts/polybar-scripts/popup-calendar/popup-calendar.sh --popup &
 
 [settings]
 screenchange-reload = true
