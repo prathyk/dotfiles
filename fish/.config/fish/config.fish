@@ -4,3 +4,4 @@ if not functions -q fisher
 	fish -c fisher
 end
 
+starship init fish | source

@@ -16,6 +16,9 @@
 ;
 ;==========================================================
 
+include-file = ~/.config/polybar/colors.ini
+include-file = ~/.config/polybar/bars.ini
+
 [colors]
 ;background = ${xrdb:color0:#222}
 background = #222
@@ -30,10 +33,10 @@ alert = #bd2c40
 [bar/example]
 ;monitor = ${env:MONITOR:HDMI-1}
 width = 100%
-height = 27
+height = 32
 ;offset-x = 1%
 ;offset-y = 1%
-radius = 6.0
+radius = 1.0
 fixed-center = false
 
 background = ${colors.background}
@@ -42,29 +45,24 @@ foreground = ${colors.foreground}
 line-size = 3
 line-color = #f00
 
-border-size = 4
+border-size = 2
 border-color = #00000000
 
 padding-left = 0
-padding-right = 2
+padding-right = 0
 
 module-margin-left = 1
 module-margin-right = 2
 
-font-0 = tamsyn:pixelsize=10;1
+font-0 = tamsyn:pixelsize=14;1
 ; font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
-font-2 = siji:pixelsize=10;1
+font-2 = siji:pixelsize=14;1
 ; font-0 = "Tamsyn:pixelsize=12;0"
-font-1 = "Roboto:size=11:weight=bold;2"
+font-1 = "Roboto:size=15:weight=bold;2"
 ; font-2 = "Noto Sans:size=11;1"
 
-modules-left = i3
-modules-center = i3-windows
-modules-right = memory cpu eth battery date powermenu popup-calendar
-
-tray-position = right
+tray-position = left
 tray-padding = 2
-bottom = true
 ;tray-background = #0063ff
 
 ;wm-restack = bspwm
@@ -80,6 +78,23 @@ wm-restack = i3
 
 cursor-click = pointer
 cursor-scroll = ns-resize
+
+[bar/top]
+inherit = bar/example
+bottom = false
+
+enable-ipc = true
+modules-right = eth memory cpu1 cpu2 cpu3 cpu4 cpu5 cpu6 cput  battery 
+modules-left = i3 xwindow 
+
+[bar/bottom]
+inherit = bar/example
+bottom = true
+
+modules-right = popup-calendar
+modules-center = i3-windows
+enable-ipc = true
+
 
 [module/xwindow]
 type = internal/xwindow
@@ -100,38 +115,6 @@ label-indicator-padding = 2
 label-indicator-margin = 1
 label-indicator-background = ${colors.secondary}
 label-indicator-underline = ${colors.secondary}
-
-[module/filesystem]
-type = internal/fs
-interval = 25
-
-mount-0 = /
-
-label-mounted = %{F#0a81f5}%mountpoint%%{F-}: %percentage_used%%
-label-unmounted = %mountpoint% not mounted
-label-unmounted-foreground = ${colors.foreground-alt}
-
-[module/bspwm]
-type = internal/bspwm
-
-label-focused = %index%
-label-focused-background = ${colors.background-alt}
-label-focused-underline= ${colors.primary}
-label-focused-padding = 2
-
-label-occupied = %index%
-label-occupied-padding = 2
-
-label-urgent = %index%!
-label-urgent-background = ${colors.alert}
-label-urgent-padding = 2
-
-label-empty = %index%
-label-empty-foreground = ${colors.foreground-alt}
-label-empty-padding = 2
-
-; Separator in between workspaces
-; label-separator = |
 
 [module/i3]
 type = internal/i3
@@ -171,48 +154,35 @@ label-urgent-padding = 2
 ; label-separator = |
 
 
-[module/mpd]
-type = internal/mpd
-format-online = <label-song>  <icon-prev> <icon-stop> <toggle> <icon-next>
-
-icon-prev = 
-icon-stop = 
-icon-play = 
-icon-pause = 
-icon-next = 
-
-label-song-maxlen = 25
-label-song-ellipsis = true
-
-[module/xbacklight]
-type = internal/xbacklight
-
-format = <label> <bar>
-label = BL
-
-bar-width = 10
-bar-indicator = |
-bar-indicator-foreground = #fff
-bar-indicator-font = 2
-bar-fill = ─
-bar-fill-font = 2
-bar-fill-foreground = #9f78e1
-bar-empty = ─
-bar-empty-font = 2
-bar-empty-foreground = ${colors.foreground-alt}
-
-[module/backlight-acpi]
-inherit = module/xbacklight
-type = internal/backlight
-card = intel_backlight
-
 [module/cpu]
 type = internal/cpu
 interval = 2
 format-prefix = " "
 format-prefix-foreground = ${colors.foreground-alt}
 format-underline = #f90000
-label = %percentage:2%%
+
+[module/cpu1]
+inherit = module/cpu
+label = %percentage-core1:4%%
+[module/cpu2]
+inherit = module/cpu
+label = %percentage-core2:4%%
+[module/cpu3]
+inherit = module/cpu
+label = %percentage-core3:4%%
+[module/cpu4]
+inherit = module/cpu
+label = %percentage-core4:4%%
+[module/cpu5]
+inherit = module/cpu
+label = %percentage-core5:4%%
+[module/cpu6]
+inherit = module/cpu
+label = %percentage-core6:4%%
+[module/cput]
+inherit = module/cpu
+label = %percentage:4%%
+format-underline = #f900ff
 
 [module/memory]
 type = internal/memory
@@ -220,7 +190,7 @@ interval = 2
 format-prefix = " "
 format-prefix-foreground = ${colors.foreground-alt}
 format-underline = #4bffdc
-label = %percentage_used%%
+label = %percentage_used:2%% %mb_used:7%/%mb_total:7%
 
 [module/wlan]
 type = internal/network
@@ -252,7 +222,9 @@ interval = 3.0
 format-connected-underline = #55aa55
 format-connected-prefix = " "
 format-connected-prefix-foreground = ${colors.foreground-alt}
-label-connected = %local_ip%
+label-connected = %local_ip% %upspeed:2% %downspeed:2%
+;   %upspeed%   [wireless+wired]
+;   %downspeed% [wireless+wired]
 
 format-disconnected =
 ;format-disconnected = <label-disconnected>
@@ -383,35 +355,6 @@ ramp-1 = 
 ramp-2 = 
 ramp-foreground = ${colors.foreground-alt}
 
-[module/powermenu]
-type = custom/menu
-
-expand-right = true
-
-format-spacing = 1
-
-label-open = 
-label-open-foreground = ${colors.secondary}
-label-close =  cancel
-label-close-foreground = ${colors.secondary}
-label-separator = |
-label-separator-foreground = ${colors.foreground-alt}
-
-menu-0-0 = reboot
-menu-0-0-exec = menu-open-1
-menu-0-1 = power off
-menu-0-1-exec = menu-open-2
-
-menu-1-0 = cancel
-menu-1-0-exec = menu-open-0
-menu-1-1 = reboot
-menu-1-1-exec = sudo reboot
-
-menu-2-0 = power off
-menu-2-0-exec = sudo poweroff
-menu-2-1 = cancel
-menu-2-1-exec = menu-open-0
-
 [module/i3-windows]
 type = custom/script
 exec = ~/.config/polybar/modules/polybar-i3-windows/module.py
@@ -422,6 +365,66 @@ type = custom/script
 exec = ~/.config/polybar/polybar-scripts/polybar-scripts/popup-calendar/popup-calendar.sh
 interval = 5
 click-left = ~/.config/polybar/polybar-scripts/polybar-scripts/popup-calendar/popup-calendar.sh --popup &
+
+[module/window_switch]
+type = custom/text
+content =  Switch
+
+; "content" has the same properties as "format-NAME"
+content-background = ${color.mb}
+;;content-foreground = #fff
+; content-padding = ${layout.module-padding}
+
+; "click-(left|middle|right)" will be executed using "/usr/bin/env sh -c $COMMAND"
+click-left = skippy-xd
+click-middle = skippy-xd
+click-right = ~/.config/polybar/scripts/windows
+
+; "scroll-(up|down)" will be executed using "/usr/bin/env sh -c $COMMAND"
+;;scroll-up = skippy-xd
+;;scroll-down = skippy-xd
+
+;; _-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_
+
+[module/launcher]
+type = custom/text
+content = 
+
+; "content" has the same properties as "format-NAME"
+content-background = ${color.mb}
+;;content-foreground = ${color.mf}
+; content-padding = ${layout.module-padding}
+
+; "click-(left|middle|right)" will be executed using "/usr/bin/env sh -c $COMMAND"
+click-left = ~/.config/polybar/scripts/launcher
+;;click-middle = ~/.config/polybar/scripts/launcher-full
+click-right = ~/.config/polybar/scripts/launcher-alt
+
+; "scroll-(up|down)" will be executed using "/usr/bin/env sh -c $COMMAND"
+;;scroll-up = ~/.config/polybar/scripts/launcher-full
+scroll-down = ~/.config/polybar/scripts/launcher-full
+
+;; _-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_
+
+[module/sysmenu]
+type = custom/text
+content = 
+
+; "content" has the same properties as "format-NAME"
+; content-background = ${color.mb}
+; content-foreground = ${color.mf}
+; content-padding = ${layout.module-padding}
+
+; "click-(left|middle|right)" will be executed using "/usr/bin/env sh -c $COMMAND"
+click-left = ~/.config/polybar/scripts/powermenu
+;;click-middle = ~/.config/polybar/scripts/powermenu
+click-right = ~/.config/polybar/scripts/powermenu-alt
+
+; "scroll-(up|down)" will be executed using "/usr/bin/env sh -c $COMMAND"
+;;scroll-up = ~/.config/polybar/scripts/powermenu
+;;scroll-down = ~/.config/polybar/scripts/powermenu
+
+;; _-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_
 
 [settings]
 screenchange-reload = true

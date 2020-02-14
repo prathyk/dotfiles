@@ -20,6 +20,9 @@ base=(
 	wallpaper
 	xsettings
 	polybar
+	starship
+	xresources
+	urxvt
 )
 
 # folders that should, or only need to be installed for a local user

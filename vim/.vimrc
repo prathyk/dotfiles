@@ -326,7 +326,7 @@ command! PlugHelp call fzf#run(fzf#wrap({
 "
 " appearance {{{
 let g:solarized_termcolors=256
-silent! colorscheme solarized
+silent! colorscheme molokai
 set background=dark
 let g:gitgutter_override_sign_column_highlight = 0
 "}}}
