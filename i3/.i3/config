@@ -52,7 +52,7 @@ floating_modifier Mod1
 
 
 # start a terminal
-bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+Return exec termite
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -236,20 +236,19 @@ exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 bindsym Print exec scrot 'Cheese_%a-%d%b%y_%H.%M.png' -e 'viewnior ~/$f'
 bindsym $mod+Delete exec i3lock -i ~/wallpaper.png
 
-bindsym $mod+Shift+m exec --no-startup-id urxvt -name master -e tmux attach -t master 
+bindsym $mod+Shift+m exec --no-startup-id termite --exec="tmux attach -t master" --title=master &
 bindsym $mod+Shift+w exec $browser
 bindsym $mod+Shift+i exec idea1
 bindsym $mod+Shift+o exec --no-startup-id $browser --app=https://outlook.office.com/mail/inbox &
 bindsym $mod+Shift+t exec --no-startup-id $browser --app=https://teams.webex.com/teams &
 bindsym $mod+Shift+a exec --no-startup-id $browser --app=https://agilestudio.pega.com &
-bindsym $mod+Shift+f exec --no-startup-id urxvt -name ranger -e ranger ; focus
-bindsym $mod+Shift+s exec --no-startup-id urxvt -name sicp -e tmux attach -t sicp &
+bindsym $mod+Shift+f exec --no-startup-id termite --exec="ranger" --title=ranger & ; focus
+bindsym $mod+Shift+s exec --no-startup-id termite --exec="tmux attach -t sicp" --title=sicp &
 
 #Boot with apps
 # WS 1
-exec --no-startup-id urxvt -name master -e tmux attach -t master 
-# Start urxvt -name irssi
-assign [class="^URxvt$" instance="^master$"] 1
+exec --no-startup-id termite --exec="tmux attach -t master" --title=master &
+assign [title="master"] 1
 # WS 2
 exec --no-startup-id $browser
 assign [instance=$browserClass window_role="browser"] 2
@@ -266,12 +265,12 @@ assign [instance="teams.webex.com" window_role="pop-up"] 5
 exec --no-startup-id $browser --app=https://agilestudio.pega.com &
 assign [instance="agilestudio.pega.com" window_role="pop-up"] 6
 # WS 7
-exec --no-startup-id urxvt -name ranger -e ranger 
-assign [class="^URxvt$" instance="^ranger$"] 7
+exec --no-startup-id termite --exec="ranger" --title=ranger &
+assign [title="ranger"] 7
 # WS 8
-exec --no-startup-id urxvt -name sicp -e tmux attach -t sicp 
-# exec --no-startup-id urxvt -e "tmux attach -t sicp" -name sicp &
-assign [class="^URxvt$" instance="^sicp$"] 8
+exec --no-startup-id termite --exec="tmux attach -t sicp" --title=sicp &
+# exec --no-startup-id termite --exec="tmux attach -t sicp" --title=sicp &
+assign [title="sicp"] 8
 assign [instance="sicp"] 8
 # assign [name="Structure and Interpretation of Computer Programs"] 8
 
@@ -282,7 +281,7 @@ assign [instance="sicp"] 8
 for_window [class=".*"] border pixel 2
 gaps inner 0
 gaps outer 0
-assign [class=xfce4-terminal] 1
+assign [class=termite] 1
 for_window [class=Viewnior|feh|Audacious|File-roller|Lxappearance|Lxtask|Pavucontrol] floating enable
 for_window [class=URxvt|Chromium|Geany|Evince|Soffice|libreoffice*|mpv|Ghb|Xfburn|Gimp*|Inkscape|Vlc|Lxappearance|Audacity] focus
 for_window [class=Xfburn|GParted|System-config-printer.py|Lxtask|Pavucontrol|Exo-helper*|Lxrandr|Arandr] focus

@@ -1,2 +1,15 @@
 [git_status]
 disabled = true
+
+[git_branch]
+truncation_length = 30
+
+[aws]
+disabled = true
+[java]
+disabled = true
+
+[character]
+symbol = ">"
+error_symbol = "x"
+use_symbol_for_status = true

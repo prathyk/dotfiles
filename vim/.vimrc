@@ -14,6 +14,7 @@ set shortmess=atI
 set ruler
 set showcmd
 set confirm
+set clipboard+=unnamedplus
 
 set sidescroll=1
 set sidescrolloff=3
@@ -252,6 +253,7 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'prabirshrestha/async.vim'
 Plug 'prabirshrestha/vim-lsp'
+Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' }
 call plug#end()
 "}}}
 

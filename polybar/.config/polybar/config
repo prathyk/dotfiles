@@ -84,8 +84,9 @@ inherit = bar/example
 bottom = false
 
 enable-ipc = true
-modules-right = eth memory cpu1 cpu2 cpu3 cpu4 cpu5 cpu6 cput  battery 
+modules-right = cpu1 cpu2 cpu3 cpu4 cpu5 cpu6 cput  battery 
 modules-left = i3 xwindow 
+modules-center = eth memory 
 
 [bar/bottom]
 inherit = bar/example
