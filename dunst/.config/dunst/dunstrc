@@ -29,8 +29,8 @@ title = Dunst
 class = Dunst
 
 [shortcuts]
-close = ctrl+space
-close_all = ctrl+shift+space
+close = mod1+space
+close_all = mod1+shift+space
 history = ctrl+grave
 context = ctrl+shift+period
 

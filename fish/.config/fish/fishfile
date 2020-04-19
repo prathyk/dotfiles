@@ -1,7 +1,8 @@
-franciscolourenco/done
-jethrokuan/z
-jethrokuan/fzf
-reitzig/sdkman-for-fish
-evanlucas/fish-kubectl-completions
 oh-my-fish/plugin-aws
 barnybug/docker-fish-completion
+franciscolourenco/done
+jethrokuan/fzf
+fishpkg/fish-humanize-duration
+evanlucas/fish-kubectl-completions
+reitzig/sdkman-for-fish
+jethrokuan/z
